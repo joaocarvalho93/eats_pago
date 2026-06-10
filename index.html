@@ -1,999 +1,369 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3S Eats + iFood Pago — Material Comercial</title>
+<title>3S Eats + iFood Pago</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { overflow: hidden; font-family: 'Inter', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body.scroll-mode { overflow-y: auto; }
+body.scroll-mode .container { transform: none !important; }
+body.scroll-mode .slide { min-height: 100vh; height: auto; }
+body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 
-  :root {
-    --primary: #EA1D2C;
-    --primary-dark: #C41522;
-    --primary-light: #FFF0F1;
-    --dark: #1B1B1B;
-    --dark-mid: #2D2D2D;
-    --accent: #FF6B35;
-    --green: #00A844;
-    --green-light: #E8F9EF;
-    --bg: #FFFFFF;
-    --bg-alt: #F7F7F9;
-    --text: #1B1B1B;
-    --text-secondary: #6B7280;
-    --border: #E5E7EB;
-    --border-light: #F0F0F3;
-  }
+.container { transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+.slide {
+  width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 80px; position: relative; overflow: hidden;
+}
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow: hidden;
-    transition: overflow 0.3s;
-    -webkit-font-smoothing: antialiased;
-  }
+/* NAV */
+.nav-arrows {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  z-index: 100; display: flex; gap: 12px;
+}
+.nav-arrows button {
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid #ddd;
+  background: rgba(255,255,255,0.95); color: #1B1B1B; font-size: 18px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.2s;
+}
+.nav-arrows button:hover { background: #EA1D2C; color: white; border-color: #EA1D2C; }
+.counter { position: fixed; bottom: 40px; right: 30px; z-index: 100; font-size: 13px; color: #888; font-weight: 600; }
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: #EA1D2C; z-index: 1000; transition: width 0.4s; }
+.mode-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 1000;
+  display: flex; gap: 4px; background: rgba(255,255,255,0.95);
+  border-radius: 10px; padding: 4px; border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.mode-toggle button {
+  background: none; border: none; color: #888; padding: 7px 14px;
+  border-radius: 7px; cursor: pointer; font-size: 13px; font-weight: 600;
+  font-family: inherit; transition: all 0.2s;
+}
+.mode-toggle button.on { background: #EA1D2C; color: white; }
 
-  body.scroll-mode { overflow-y: auto; overflow-x: hidden; }
-  body.scroll-mode .slide { min-height: 100vh; height: auto; }
-  body.scroll-mode .nav-arrows { display: none; }
-  body.scroll-mode .slide-counter { display: none; }
+/* COLORS */
+:root {
+  --red: #EA1D2C; --red-light: #FFF0F1;
+  --green: #00A844; --green-light: #E8F9EF;
+  --orange: #FF6B35;
+  --dark: #1B1B1B; --text2: #6B7280;
+  --bg2: #F7F7F9; --border: #E5E7EB; --border2: #F0F0F3;
+}
 
-  /* ===== MODE TOGGLE ===== */
-  .mode-toggle {
-    position: fixed; top: 20px; right: 20px; z-index: 1000;
-    display: flex; gap: 4px;
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(12px);
-    border-radius: 10px; padding: 4px;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  }
-  .mode-toggle button {
-    background: transparent; border: none;
-    color: var(--text-secondary); padding: 8px 16px;
-    border-radius: 8px; cursor: pointer;
-    font-size: 13px; font-weight: 600;
-    font-family: inherit; transition: all 0.2s;
-  }
-  .mode-toggle button.active {
-    background: var(--primary); color: white;
-  }
+/* SHARED */
+.sec-head { text-align: center; margin-bottom: 44px; width: 100%; }
+.sec-head .tag { display: inline-block; padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; background: var(--red-light); color: var(--red); }
+.sec-head h2 { font-size: 34px; font-weight: 800; }
+.sec-head h2 em { font-style: normal; color: var(--red); }
+.sec-head p { color: var(--text2); font-size: 15px; margin-top: 8px; max-width: 580px; margin-left: auto; margin-right: auto; }
 
-  /* ===== NAVIGATION ===== */
-  .nav-arrows {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-    z-index: 100; display: flex; align-items: center; gap: 16px;
-  }
-  .nav-arrows button {
-    width: 46px; height: 46px; border-radius: 50%;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(10px);
-    color: var(--text); font-size: 18px;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    font-family: inherit;
-  }
-  .nav-arrows button:hover {
-    background: var(--primary); color: white;
-    border-color: var(--primary); transform: scale(1.08);
-  }
+/* S1 CAPA */
+.s-capa { background: var(--dark); color: white; flex-direction: column; text-align: center; }
+.s-capa::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background:radial-gradient(circle,rgba(234,29,44,.2) 0%,transparent 70%); border-radius:50%; }
+.logos { display:flex; align-items:center; gap:20px; margin-bottom:36px; z-index:1; position:relative; }
+.lbox { width:72px; height:72px; border-radius:18px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:20px; color:white; }
+.l3s { background:linear-gradient(135deg,var(--red),var(--orange)); }
+.lif { background:linear-gradient(135deg,#C41522,var(--red)); }
+.lplus { font-size:28px; color:rgba(255,255,255,.35); }
+.s-capa h1 { font-size:48px; font-weight:800; line-height:1.1; margin-bottom:18px; z-index:1; position:relative; }
+.s-capa h1 em { font-style:normal; color:var(--red); }
+.s-capa .sub { font-size:18px; color:rgba(255,255,255,.55); max-width:600px; line-height:1.5; z-index:1; position:relative; }
+.badge { margin-top:36px; padding:9px 22px; background:rgba(234,29,44,.15); border:1px solid rgba(234,29,44,.3); border-radius:30px; font-size:12px; color:var(--red); font-weight:700; letter-spacing:1.5px; text-transform:uppercase; z-index:1; position:relative; }
 
-  .slide-counter {
-    position: fixed; bottom: 40px; right: 30px; z-index: 100;
-    font-size: 13px; color: var(--text-secondary); font-weight: 600;
-  }
+/* S2 O QUE É */
+.s-oque { background: white; }
+.split { display:grid; grid-template-columns:1fr 1fr; gap:60px; width:100%; max-width:1200px; align-items:center; }
+.split h2 { font-size:36px; font-weight:800; line-height:1.15; margin-bottom:20px; }
+.split h2 em { font-style:normal; color:var(--red); }
+.split p { font-size:15px; color:var(--text2); line-height:1.7; margin-bottom:12px; }
+.pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+.pills span { padding:9px 18px; border-radius:30px; font-size:13px; font-weight:600; }
+.p1 { background:var(--red-light); color:var(--red); }
+.p2 { background:#FFF5EE; color:var(--orange); }
+.p3 { background:var(--green-light); color:var(--green); }
+.p4 { background:#EFF6FF; color:#3B82F6; }
+.cards { display:flex; flex-direction:column; gap:14px; }
+.scard { background:white; border:1px solid var(--border); border-radius:14px; padding:20px 22px; display:flex; align-items:center; gap:16px; }
+.scard .ic { width:44px; height:44px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.ic-r { background:var(--red-light); } .ic-o { background:#FFF5EE; } .ic-g { background:var(--green-light); } .ic-b { background:#EFF6FF; }
+.scard h4 { font-size:14px; font-weight:700; margin-bottom:2px; }
+.scard .t { font-size:12px; color:var(--text2); }
 
-  /* ===== PROGRESS BAR ===== */
-  .progress-bar {
-    position: fixed; top: 0; left: 0; height: 3px;
-    background: var(--primary); z-index: 1000; transition: width 0.4s ease;
-  }
+/* S3 MÓDULOS */
+.s-mod { background: var(--bg2); }
+.mgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; width:100%; max-width:1200px; }
+.mcard { background:white; border:1px solid var(--border); border-radius:16px; padding:26px 20px; text-align:center; position:relative; overflow:hidden; }
+.mcard::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.mcard:nth-child(1)::before { background:var(--red); }
+.mcard:nth-child(2)::before { background:var(--orange); }
+.mcard:nth-child(3)::before { background:var(--green); }
+.mcard:nth-child(4)::before { background:#3B82F6; }
+.mcard .mi { width:52px; height:52px; border-radius:14px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.mcard h3 { font-size:16px; font-weight:700; margin-bottom:8px; }
+.mcard p { font-size:12px; color:var(--text2); line-height:1.5; }
+.mcard ul { list-style:none; margin-top:12px; text-align:left; }
+.mcard li { font-size:11px; color:var(--text2); padding:4px 0; border-bottom:1px solid var(--border2); display:flex; align-items:center; gap:6px; }
+.mcard li::before { content:'\2713'; color:var(--green); font-weight:700; font-size:10px; }
 
-  /* ===== SLIDES ===== */
-  .slides-container { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-  body:not(.scroll-mode) .slides-container { height: 100vh; }
+/* S4 IFOOD PAGO */
+.s-ifp { background:white; }
+.ifgrid { display:grid; grid-template-columns:1.2fr 1fr; gap:50px; width:100%; max-width:1200px; align-items:center; }
+.ifgrid h2 { font-size:34px; font-weight:800; line-height:1.15; margin-bottom:16px; }
+.ifgrid h2 em { font-style:normal; color:var(--green); }
+.ifgrid .sub { font-size:15px; color:var(--text2); line-height:1.7; margin-bottom:24px; }
+.blist { display:flex; flex-direction:column; gap:12px; }
+.bitem { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:var(--bg2); border-radius:11px; }
+.bitem .bi { width:36px; height:36px; border-radius:9px; background:var(--green-light); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+.bitem h4 { font-size:13px; font-weight:700; margin-bottom:2px; }
+.bitem p { font-size:12px; color:var(--text2); line-height:1.5; }
+.hboxes { display:flex; flex-direction:column; gap:12px; }
+.hbox { background:var(--green-light); border:1px solid rgba(0,168,68,.2); border-radius:14px; padding:24px; text-align:center; }
+.hbox .bn { font-size:40px; font-weight:900; color:var(--green); }
+.hbox .lb { font-size:13px; color:var(--text2); margin-top:4px; }
+.hbox-r { background:var(--red-light); border-color:rgba(234,29,44,.2); }
+.hbox-r .bn { color:var(--red); }
 
-  .slide {
-    width: 100vw; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    padding: 60px 80px; position: relative; overflow: hidden;
-  }
+/* S5 POR QUE */
+.s-pq { background:var(--bg2); flex-direction:column; }
+.pqgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; width:100%; max-width:1100px; }
+.pqcard { background:white; border:1px solid var(--border); border-radius:14px; padding:24px; }
+.pqcard .icon { font-size:28px; margin-bottom:12px; }
+.pqcard h3 { font-size:15px; font-weight:700; margin-bottom:6px; }
+.pqcard p { font-size:12px; color:var(--text2); line-height:1.6; }
 
-  /* ===== SECTION HEADER ===== */
-  .section-header { text-align: center; margin-bottom: 48px; width: 100%; }
-  .section-header .tag {
-    display: inline-block; padding: 6px 18px; border-radius: 20px;
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1.5px; margin-bottom: 14px;
-    background: var(--primary-light); color: var(--primary);
-  }
-  .section-header h2 { font-size: 36px; font-weight: 800; color: var(--text); }
-  .section-header h2 span { color: var(--primary); }
-  .section-header p {
-    color: var(--text-secondary); font-size: 16px;
-    margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto;
-  }
+/* S6 COMPARATIVO */
+.s-comp { background:white; flex-direction:column; padding:40px 60px; }
+.twrap { width:100%; max-width:800px; margin-top:8px; }
+.ttable { width:100%; border-collapse:separate; border-spacing:0; font-size:14px; }
+.ttable th { padding:14px 20px; text-align:center; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.5px; color:var(--text2); border-bottom:2px solid var(--border); background:var(--bg2); }
+.ttable th:first-child { text-align:left; border-radius:10px 0 0 0; }
+.ttable th:last-child { border-radius:0 10px 0 0; }
+.ttable th.hl { background:var(--green-light); color:var(--green); border-bottom-color:var(--green); }
+.ttable td { padding:12px 20px; text-align:center; border-bottom:1px solid var(--border2); font-weight:500; }
+.ttable td:first-child { text-align:left; font-weight:600; }
+.ttable td.hl { background:rgba(0,168,68,.06); color:var(--green); font-weight:700; }
+.ttable .eco { display:block; font-size:10px; color:var(--green); font-weight:600; margin-top:2px; }
+.tnote { margin-top:18px; font-size:11px; color:var(--text2); text-align:center; line-height:1.6; }
 
-  /* ===== SLIDE 1 — CAPA ===== */
-  .slide-capa {
-    background: var(--dark); color: white;
-    flex-direction: column; text-align: center;
-  }
-  .slide-capa::before {
-    content: ''; position: absolute; top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(234,29,44,0.2) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .slide-capa::after {
-    content: ''; position: absolute; bottom: -150px; left: -150px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .logo-container {
-    display: flex; align-items: center; gap: 24px;
-    margin-bottom: 40px; position: relative; z-index: 1;
-  }
-  .logo-box {
-    width: 80px; height: 80px; border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 22px; letter-spacing: -0.5px; color: white;
-  }
-  .logo-3s { background: linear-gradient(135deg, var(--primary), var(--accent)); }
-  .logo-ifood { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); }
-  .logo-plus { font-size: 32px; color: rgba(255,255,255,0.4); font-weight: 300; }
-  .capa-title {
-    font-size: 52px; font-weight: 800; line-height: 1.1;
-    margin-bottom: 20px; position: relative; z-index: 1; color: white;
-  }
-  .capa-title span { color: var(--primary); }
-  .capa-subtitle {
-    font-size: 20px; color: rgba(255,255,255,0.6); font-weight: 400;
-    max-width: 620px; line-height: 1.5; position: relative; z-index: 1;
-  }
-  .capa-badge {
-    margin-top: 40px; padding: 10px 24px;
-    background: rgba(234,29,44,0.15);
-    border: 1px solid rgba(234,29,44,0.3);
-    border-radius: 30px; font-size: 13px;
-    color: var(--primary); font-weight: 700;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    position: relative; z-index: 1;
-  }
+/* S7 INCLUSO */
+.s-inc { background:var(--bg2); flex-direction:column; }
+.incgrid { display:grid; grid-template-columns:1fr 1fr; gap:44px; width:100%; max-width:1100px; align-items:start; }
+.incgrid p { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:10px; }
+.ilist { display:flex; flex-direction:column; gap:8px; margin-top:16px; }
+.iitem { display:flex; align-items:center; gap:10px; padding:12px 16px; background:white; border-radius:10px; border-left:3px solid var(--green); border-top:1px solid var(--border2); border-right:1px solid var(--border2); border-bottom:1px solid var(--border2); }
+.iitem span { font-size:13px; font-weight:500; }
+.iitem .ic { font-size:16px; }
+.callout { background:white; border:1px solid var(--border); border-radius:14px; padding:24px; margin-top:6px; }
+.callout h3 { font-size:16px; font-weight:700; margin-bottom:10px; }
+.callout p { font-size:13px; color:var(--text2); line-height:1.6; }
+.callout .hl2 { display:inline-block; margin-top:14px; padding:9px 18px; background:var(--green-light); border-radius:8px; color:var(--green); font-weight:700; font-size:13px; }
 
-  /* ===== SLIDE 2 — O QUE É ===== */
-  .slide-oque { background: var(--bg); }
-  .content-split {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 70px;
-    width: 100%; max-width: 1200px; align-items: center;
-  }
-  .content-left h2 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 22px; }
-  .content-left h2 span { color: var(--primary); }
-  .content-left p { font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+/* S8 OFERTA */
+.s-oferta { background:var(--dark); color:white; flex-direction:column; }
+.s-oferta .sec-head h2 { color:white; }
+.s-oferta .sec-head p { color:rgba(255,255,255,.55); }
+.s-oferta .sec-head .tag { background:rgba(234,29,44,.2); }
+.ogrid { display:grid; grid-template-columns:1fr 1fr; gap:28px; width:100%; max-width:1000px; }
+.ocard { border-radius:18px; padding:32px 28px; text-align:center; }
+.ocard-l { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); }
+.ocard-r { background:linear-gradient(135deg,rgba(234,29,44,.12),rgba(255,107,53,.06)); border:2px solid var(--red); position:relative; }
+.ocard h3 { font-size:19px; font-weight:700; margin-bottom:8px; }
+.ocard .d { font-size:13px; color:rgba(255,255,255,.5); margin-bottom:18px; }
+.ocard .po { font-size:16px; color:rgba(255,255,255,.4); text-decoration:line-through; margin-bottom:4px; }
+.ocard .pf { font-size:38px; font-weight:900; color:var(--green); margin-bottom:4px; }
+.ocard .pc { font-size:12px; color:rgba(255,255,255,.55); margin-bottom:20px; }
+.ocard .pt { font-size:13px; color:rgba(255,255,255,.55); margin-bottom:4px; }
+.ocard .pm { font-size:32px; font-weight:900; margin-bottom:4px; }
+.ocard .pd { font-size:12px; color:rgba(255,255,255,.45); margin-bottom:20px; line-height:1.4; }
+.obadge { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--red); padding:5px 18px; border-radius:20px; font-size:11px; font-weight:700; text-transform:uppercase; white-space:nowrap; }
+.ofl { list-style:none; text-align:left; margin-top:6px; }
+.ofl li { padding:6px 0; font-size:12px; color:rgba(255,255,255,.65); display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,.06); }
+.ofl li::before { content:'\2713'; color:var(--green); font-weight:700; }
+.setup { text-align:center; padding:16px 24px; margin-top:24px; background:rgba(255,255,255,.04); border-radius:10px; border:1px solid rgba(255,255,255,.08); max-width:1000px; }
+.setup p { font-size:13px; color:rgba(255,255,255,.45); }
+.setup strong { color:white; }
 
-  .feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-  .pill {
-    padding: 10px 20px; border-radius: 30px; font-size: 13px;
-    font-weight: 600; border: 1px solid var(--border);
-    background: var(--bg-alt);
-  }
-  .pill-delivery { border-color: rgba(234,29,44,0.3); color: var(--primary); background: var(--primary-light); }
-  .pill-mesa { border-color: rgba(255,107,53,0.3); color: var(--accent); background: #FFF5EE; }
-  .pill-pgto { border-color: rgba(0,168,68,0.3); color: var(--green); background: var(--green-light); }
-  .pill-retirada { border-color: rgba(59,130,246,0.3); color: #3B82F6; background: #EFF6FF; }
+/* S9 CONTATO */
+.s-contato { background:white; flex-direction:column; text-align:center; }
+.s-contato h2 { font-size:40px; font-weight:800; margin-bottom:14px; }
+.s-contato h2 em { font-style:normal; color:var(--red); }
+.s-contato .sub { font-size:17px; color:var(--text2); margin-bottom:40px; max-width:480px; }
+.clinks { display:flex; gap:16px; }
+.clinks a { display:flex; align-items:center; gap:10px; padding:14px 24px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; text-decoration:none; color:var(--dark); font-size:14px; font-weight:500; }
 
-  .content-right { display: flex; flex-direction: column; gap: 16px; }
-  .stat-card {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 16px; padding: 22px 24px;
-    display: flex; align-items: center; gap: 18px;
-    transition: all 0.3s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-  .stat-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateX(6px); }
-  .stat-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .stat-icon-red { background: var(--primary-light); }
-  .stat-icon-orange { background: #FFF5EE; }
-  .stat-icon-green { background: var(--green-light); }
-  .stat-icon-blue { background: #EFF6FF; }
-  .stat-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; color: var(--text); }
-  .stat-info p { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
-
-  /* ===== SLIDE 3 — MÓDULOS ===== */
-  .slide-modulos { background: var(--bg-alt); }
-  .modulos-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
-    width: 100%; max-width: 1200px;
-  }
-  .modulo-card {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 18px; padding: 28px 22px; text-align: center;
-    transition: all 0.3s; position: relative; overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-  }
-  .modulo-card:hover { transform: translateY(-6px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-  .modulo-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  }
-  .modulo-card:nth-child(1)::before { background: var(--primary); }
-  .modulo-card:nth-child(2)::before { background: var(--accent); }
-  .modulo-card:nth-child(3)::before { background: var(--green); }
-  .modulo-card:nth-child(4)::before { background: #3B82F6; }
-  .modulo-icon {
-    width: 58px; height: 58px; border-radius: 16px;
-    margin: 0 auto 18px;
-    display: flex; align-items: center; justify-content: center; font-size: 26px;
-  }
-  .modulo-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
-  .modulo-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
-  .modulo-card ul { list-style: none; margin-top: 14px; text-align: left; }
-  .modulo-card ul li {
-    font-size: 12px; color: var(--text-secondary);
-    padding: 5px 0; border-bottom: 1px solid var(--border-light);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .modulo-card ul li::before {
-    content: '\2713'; color: var(--green); font-weight: 700; font-size: 11px;
-  }
-
-  /* ===== SLIDE 4 — IFOOD PAGO ===== */
-  .slide-ifoodpago { background: var(--bg); }
-  .ifood-hero {
-    display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
-    width: 100%; max-width: 1200px; align-items: center;
-  }
-  .ifood-left h2 { font-size: 36px; font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
-  .ifood-left h2 span { color: var(--green); }
-  .ifood-left .subtitle {
-    font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 28px;
-  }
-  .benefit-list { display: flex; flex-direction: column; gap: 14px; }
-  .benefit-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 16px 18px; background: var(--bg-alt);
-    border-radius: 12px; border: 1px solid var(--border-light);
-  }
-  .benefit-icon {
-    width: 38px; height: 38px; border-radius: 10px;
-    background: var(--green-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; flex-shrink: 0;
-  }
-  .benefit-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: var(--text); }
-  .benefit-text p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-
-  .ifood-right { display: flex; flex-direction: column; gap: 14px; }
-  .highlight-box {
-    background: var(--green-light); border: 1px solid rgba(0,168,68,0.2);
-    border-radius: 16px; padding: 26px; text-align: center;
-  }
-  .highlight-box .big-number { font-size: 44px; font-weight: 900; color: var(--green); line-height: 1; }
-  .highlight-box .label { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
-  .highlight-box-red {
-    background: var(--primary-light); border: 1px solid rgba(234,29,44,0.2);
-  }
-  .highlight-box-red .big-number { color: var(--primary); }
-
-  /* ===== SLIDE 5 — POR QUE IFOOD PAGO ===== */
-  .slide-porque { background: var(--bg-alt); flex-direction: column; }
-  .porque-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
-    width: 100%; max-width: 1100px;
-  }
-  .porque-card {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 16px; padding: 26px; transition: all 0.3s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-  }
-  .porque-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-4px); }
-  .porque-card .icon { font-size: 30px; margin-bottom: 14px; }
-  .porque-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-  .porque-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-
-  /* ===== SLIDE 6 — COMPARATIVO ===== */
-  .slide-comparativo { background: var(--bg); flex-direction: column; padding: 40px 60px; }
-  .table-wrapper { width: 100%; max-width: 800px; margin-top: 10px; }
-  .taxa-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
-  .taxa-table thead th {
-    padding: 16px 24px; text-align: center;
-    font-weight: 700; font-size: 13px; text-transform: uppercase;
-    letter-spacing: 0.5px; color: var(--text-secondary);
-    border-bottom: 2px solid var(--border); background: var(--bg-alt);
-  }
-  .taxa-table thead th:first-child { text-align: left; border-radius: 12px 0 0 0; }
-  .taxa-table thead th:nth-child(2) { color: var(--text-secondary); }
-  .taxa-table thead th:last-child { border-radius: 0 12px 0 0; }
-  .taxa-table thead th.highlight-col {
-    background: var(--green-light); color: var(--green);
-    border-bottom-color: var(--green);
-  }
-  .taxa-table thead th.avg-col { background: var(--bg-alt); }
-  .taxa-table tbody td {
-    padding: 14px 24px; text-align: center;
-    border-bottom: 1px solid var(--border-light); font-weight: 500;
-    color: var(--text);
-  }
-  .taxa-table tbody td:first-child { text-align: left; font-weight: 600; }
-  .taxa-table tbody tr:hover td { background: var(--bg-alt); }
-  .taxa-table tbody td.highlight-col {
-    background: rgba(0,168,68,0.06); color: var(--green); font-weight: 700;
-  }
-  .taxa-table tbody td.avg-col { color: var(--text-secondary); }
-  .taxa-table tbody td .economia {
-    display: block; font-size: 11px; color: var(--green); font-weight: 600; margin-top: 2px;
-  }
-  .taxa-table tbody tr:last-child td:first-child { border-radius: 0 0 0 12px; }
-  .taxa-table tbody tr:last-child td:last-child { border-radius: 0 0 12px 0; }
-  .table-note {
-    margin-top: 20px; font-size: 12px; color: var(--text-secondary);
-    text-align: center; line-height: 1.6;
-  }
-  .table-legend {
-    display: flex; gap: 24px; justify-content: center;
-    margin-top: 12px; flex-wrap: wrap;
-  }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-
-  /* ===== SLIDE 7 — O QUE ESTÁ INCLUSO ===== */
-  .slide-incluso { background: var(--bg-alt); flex-direction: column; }
-  .incluso-content {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-    width: 100%; max-width: 1100px; align-items: start;
-  }
-  .incluso-left h2 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; color: var(--text); }
-  .incluso-left h2 span { color: var(--primary); }
-  .incluso-left p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; }
-  .included-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-  .included-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 18px; background: var(--bg);
-    border-radius: 12px; border-left: 3px solid var(--green);
-    border-top: 1px solid var(--border-light);
-    border-right: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-  }
-  .included-item span { font-size: 14px; font-weight: 500; color: var(--text); }
-  .included-item .icon { font-size: 18px; }
-  .incluso-callout {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px; margin-top: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-  .incluso-callout h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
-  .incluso-callout p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
-  .incluso-callout .highlight-text {
-    display: inline-block; margin-top: 16px; padding: 10px 20px;
-    background: var(--green-light); border-radius: 10px;
-    color: var(--green); font-weight: 700; font-size: 14px;
-  }
-
-  /* ===== SLIDE 8 — PROPOSTA/OFERTA ===== */
-  .slide-proposta { background: var(--dark); color: white; flex-direction: column; }
-  .slide-proposta .section-header h2 { color: white; }
-  .slide-proposta .section-header p { color: rgba(255,255,255,0.6); }
-  .slide-proposta .section-header .tag { background: rgba(234,29,44,0.2); }
-
-  .oferta-container {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
-    width: 100%; max-width: 1000px; align-items: stretch;
-  }
-
-  .oferta-valor {
-    border-radius: 20px; padding: 36px 32px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    text-align: center;
-  }
-  .oferta-valor h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: white; }
-  .oferta-valor .desc { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-  .oferta-valor .price-original {
-    font-size: 18px; color: rgba(255,255,255,0.4);
-    text-decoration: line-through; margin-bottom: 4px;
-  }
-  .oferta-valor .price-free {
-    font-size: 42px; font-weight: 900; color: var(--green);
-    margin-bottom: 6px;
-  }
-  .oferta-valor .price-condition {
-    font-size: 13px; color: rgba(255,255,255,0.6);
-    margin-bottom: 24px; line-height: 1.4;
-  }
-  .oferta-features {
-    list-style: none; text-align: left; margin-top: 8px;
-  }
-  .oferta-features li {
-    padding: 8px 0; font-size: 13px; color: rgba(255,255,255,0.7);
-    display: flex; align-items: center; gap: 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .oferta-features li::before {
-    content: '\2713'; color: var(--green); font-weight: 700;
-  }
-
-  .oferta-ifoodpago {
-    border-radius: 20px; padding: 36px 32px;
-    background: linear-gradient(135deg, rgba(234,29,44,0.12), rgba(255,107,53,0.06));
-    border: 2px solid var(--primary);
-    text-align: center; position: relative;
-  }
-  .oferta-ifoodpago .oferta-badge {
-    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-    background: var(--primary); color: white;
-    padding: 6px 20px; border-radius: 20px;
-    font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.5px; white-space: nowrap;
-  }
-  .oferta-ifoodpago h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 10px; color: white; }
-  .oferta-ifoodpago .desc { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-  .oferta-ifoodpago .price-taxa {
-    font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 6px;
-  }
-  .oferta-ifoodpago .price-main {
-    font-size: 36px; font-weight: 900; color: white; margin-bottom: 4px;
-  }
-  .oferta-ifoodpago .price-detail {
-    font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; line-height: 1.4;
-  }
-
-  .setup-info {
-    text-align: center; padding: 18px 28px; margin-top: 28px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
-    max-width: 1000px;
-  }
-  .setup-info p { font-size: 14px; color: rgba(255,255,255,0.5); }
-  .setup-info strong { color: white; }
-
-  /* ===== SLIDE 9 — CONTATO ===== */
-  .slide-contato {
-    background: var(--bg); flex-direction: column; text-align: center;
-  }
-  .contato-title { font-size: 44px; font-weight: 800; margin-bottom: 16px; color: var(--text); }
-  .contato-title span { color: var(--primary); }
-  .contato-sub {
-    font-size: 18px; color: var(--text-secondary);
-    margin-bottom: 48px; max-width: 500px;
-  }
-  .contato-links { display: flex; gap: 20px; }
-  .contato-link {
-    display: flex; align-items: center; gap: 12px;
-    padding: 16px 28px; background: var(--bg-alt);
-    border: 1px solid var(--border); border-radius: 12px;
-    text-decoration: none; color: var(--text);
-    transition: all 0.3s; font-size: 15px; font-weight: 500;
-  }
-  .contato-link:hover { background: var(--primary-light); border-color: var(--primary); transform: translateY(-2px); }
-  .contato-link .icon { font-size: 20px; }
-
-  /* ===== ANIMATIONS ===== */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .slide.active .animate-in { animation: fadeInUp 0.6s ease forwards; }
-  .animate-in { opacity: 0; }
-  .delay-1 { animation-delay: 0.1s !important; }
-  .delay-2 { animation-delay: 0.2s !important; }
-  .delay-3 { animation-delay: 0.3s !important; }
-  .delay-4 { animation-delay: 0.4s !important; }
-  .delay-5 { animation-delay: 0.5s !important; }
-  .delay-6 { animation-delay: 0.6s !important; }
-  body.scroll-mode .animate-in { opacity: 1; animation: none; }
-
-  /* ===== RESPONSIVE — TABLET ===== */
-  @media (max-width: 1024px) {
-    .slide { padding: 40px 24px; }
-    .content-split, .ifood-hero, .incluso-content, .oferta-container { grid-template-columns: 1fr; gap: 36px; }
-    .modulos-grid { grid-template-columns: repeat(2, 1fr); }
-    .porque-grid { grid-template-columns: 1fr; }
-    .capa-title { font-size: 36px; }
-    .content-left h2, .ifood-left h2, .incluso-left h2 { font-size: 28px; }
-  }
-
-  /* ===== RESPONSIVE — MOBILE ===== */
-  @media (max-width: 768px) {
-    /* Permitir scroll dentro de cada slide no modo slides */
-    .slide {
-      padding: 30px 20px;
-      height: 100vh;
-      overflow-y: auto;
-      overflow-x: hidden;
-      align-items: flex-start;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Wrapper interno para dar padding top/bottom */
-    .slide > * { width: 100%; }
-
-    /* CAPA */
-    .capa-title { font-size: 28px; }
-    .capa-subtitle { font-size: 16px; max-width: 100%; }
-    .capa-badge { font-size: 11px; padding: 8px 18px; margin-top: 28px; }
-    .logo-box { width: 56px; height: 56px; font-size: 16px; border-radius: 14px; }
-    .logo-plus { font-size: 24px; }
-    .logo-container { gap: 14px; margin-bottom: 24px; }
-    .slide-capa { padding-top: 80px; }
-
-    /* O QUE É */
-    .content-split { gap: 28px; }
-    .content-left h2 { font-size: 24px; }
-    .content-left p { font-size: 14px; }
-    .feature-pills { gap: 8px; margin-top: 16px; }
-    .pill { padding: 8px 14px; font-size: 12px; }
-    .stat-card { padding: 16px 18px; gap: 14px; }
-    .stat-icon { width: 40px; height: 40px; font-size: 18px; border-radius: 10px; }
-    .stat-info h4 { font-size: 14px; }
-    .stat-info p { font-size: 12px; }
-
-    /* MÓDULOS */
-    .modulos-grid { grid-template-columns: 1fr; gap: 16px; }
-    .modulo-card { padding: 22px 18px; }
-    .modulo-icon { width: 48px; height: 48px; font-size: 22px; margin-bottom: 14px; }
-    .modulo-card h3 { font-size: 16px; }
-    .modulo-card p { font-size: 12px; }
-    .modulo-card ul li { font-size: 12px; }
-    .section-header { margin-bottom: 28px; }
-    .section-header h2 { font-size: 24px; }
-    .section-header p { font-size: 14px; }
-    .section-header .tag { font-size: 10px; padding: 5px 14px; }
-
-    /* IFOOD PAGO */
-    .ifood-hero { gap: 28px; }
-    .ifood-left h2 { font-size: 24px; }
-    .ifood-left .subtitle { font-size: 14px; margin-bottom: 20px; }
-    .benefit-item { padding: 12px 14px; gap: 12px; }
-    .benefit-icon { width: 34px; height: 34px; font-size: 16px; }
-    .benefit-text h4 { font-size: 13px; }
-    .benefit-text p { font-size: 12px; }
-    .highlight-box { padding: 20px; }
-    .highlight-box .big-number { font-size: 32px; }
-    .highlight-box .label { font-size: 12px; }
-
-    /* POR QUE IFOOD PAGO */
-    .porque-grid { gap: 14px; }
-    .porque-card { padding: 20px; }
-    .porque-card .icon { font-size: 24px; margin-bottom: 10px; }
-    .porque-card h3 { font-size: 15px; }
-    .porque-card p { font-size: 12px; }
-
-    /* COMPARATIVO */
-    .slide-comparativo { padding: 30px 16px; }
-    .table-wrapper { overflow-x: auto; }
-    .taxa-table { font-size: 12px; }
-    .taxa-table thead th { padding: 10px 12px; font-size: 11px; }
-    .taxa-table tbody td { padding: 10px 12px; }
-    .taxa-table tbody td .economia { font-size: 10px; }
-    .table-note { font-size: 11px; }
-
-    /* O QUE ESTÁ INCLUSO */
-    .incluso-content { gap: 24px; }
-    .incluso-left h2 { font-size: 22px; }
-    .incluso-left p { font-size: 13px; }
-    .included-item { padding: 10px 14px; gap: 10px; }
-    .included-item span { font-size: 13px; }
-    .included-item .icon { font-size: 16px; }
-    .incluso-callout { padding: 20px; }
-    .incluso-callout h3 { font-size: 16px; }
-    .incluso-callout p { font-size: 13px; }
-    .incluso-callout .highlight-text { font-size: 12px; padding: 8px 16px; }
-
-    /* OFERTA */
-    .oferta-container { gap: 24px; }
-    .oferta-valor, .oferta-ifoodpago { padding: 28px 22px; }
-    .oferta-valor h3, .oferta-ifoodpago h3 { font-size: 18px; }
-    .oferta-valor .price-original { font-size: 15px; }
-    .oferta-valor .price-free { font-size: 34px; }
-    .oferta-valor .price-condition { font-size: 12px; }
-    .oferta-ifoodpago .price-main { font-size: 28px; }
-    .oferta-ifoodpago .price-taxa { font-size: 13px; }
-    .oferta-ifoodpago .price-detail { font-size: 12px; }
-    .oferta-ifoodpago .oferta-badge { font-size: 11px; padding: 5px 16px; }
-    .oferta-features li { font-size: 12px; padding: 6px 0; }
-    .setup-info { padding: 14px 20px; margin-top: 20px; }
-    .setup-info p { font-size: 12px; }
-
-    /* CONTATO */
-    .contato-title { font-size: 30px; }
-    .contato-sub { font-size: 15px; margin-bottom: 32px; }
-    .contato-links { flex-direction: column; gap: 12px; }
-    .contato-link { font-size: 14px; padding: 14px 22px; justify-content: center; }
-
-    /* NAVEGAÇÃO */
-    .nav-arrows { bottom: 16px; }
-    .nav-arrows button { width: 40px; height: 40px; font-size: 16px; }
-    .slide-counter { bottom: 24px; right: 16px; font-size: 12px; }
-    .mode-toggle { top: 12px; right: 12px; }
-    .mode-toggle button { padding: 6px 12px; font-size: 12px; }
-  }
+@media(max-width:1024px) {
+  .slide { padding:40px 24px; }
+  .split,.ifgrid,.incgrid,.ogrid { grid-template-columns:1fr; gap:32px; }
+  .mgrid { grid-template-columns:repeat(2,1fr); }
+  .pqgrid { grid-template-columns:1fr; }
+  .s-capa h1 { font-size:34px; }
+  .split h2,.ifgrid h2 { font-size:28px; }
+}
 </style>
 </head>
 <body>
 
-<div class="progress-bar" id="progressBar"></div>
+<div class="progress" id="prog"></div>
+<div class="mode-toggle"><button class="on" id="bSlide" onclick="setMode('slide')">Slides</button><button id="bScroll" onclick="setMode('scroll')">Scroll</button></div>
+<div class="nav-arrows"><button onclick="prev()">&#8592;</button><button onclick="next()">&#8594;</button></div>
+<div class="counter" id="cnt">1 / 9</div>
 
-<div class="mode-toggle">
-  <button id="btnSlide" class="active" onclick="setMode('slide')">Slides</button>
-  <button id="btnScroll" onclick="setMode('scroll')">Scroll</button>
+<div class="container" id="c">
+
+<div class="slide s-capa">
+<div class="logos"><div class="lbox l3s">3S</div><span class="lplus">+</span><div class="lbox lif">iFood</div></div>
+<h1>3S Eats <em>+ iFood Pago</em></h1>
+<p class="sub">Solucao completa de pedidos e pagamento digital para restaurantes. Tecnologia white-label com o poder do iFood Pago integrado.</p>
+<div class="badge">Material Comercial</div>
 </div>
 
-<div class="nav-arrows" id="navArrows">
-  <button onclick="prevSlide()">&#8592;</button>
-  <button onclick="nextSlide()">&#8594;</button>
+<div class="slide s-oque">
+<div class="split"><div>
+<h2>O que e o <em>3S Eats</em>?</h2>
+<p>O 3S Eats e a solucao personalizada para restaurantes, com modulos de entrega, retirada, pedido na mesa e pagamento. Um Super App white-label que se adapta a qualquer modelo de restaurante.</p>
+<p>Altamente personalizavel e parametrizavel, o app carrega a identidade da sua marca: logo, cores, banners, textos — tudo customizado.</p>
+<div class="pills"><span class="p1">Delivery</span><span class="p2">Pedido na Mesa</span><span class="p3">Pagamento</span><span class="p4">Retirada</span></div>
+</div><div class="cards">
+<div class="scard"><div class="ic ic-r">&#x1F4F1;</div><div><h4>White-Label Completo</h4><p class="t">App com a marca do restaurante na App Store e Google Play</p></div></div>
+<div class="scard"><div class="ic ic-o">&#x2699;</div><div><h4>Super App Adaptativo</h4><p class="t">Responsivo e funcional em qualquer dispositivo</p></div></div>
+<div class="scard"><div class="ic ic-g">&#x1F4B3;</div><div><h4>Pagamento Integrado</h4><p class="t">iFood Pago embutido para pagamentos seguros</p></div></div>
+<div class="scard"><div class="ic ic-b">&#x1F310;</div><div><h4>Multi-Unidade</h4><p class="t">Gerencie todas as lojas em um so lugar</p></div></div>
+</div></div>
 </div>
 
-<div class="slide-counter" id="slideCounter">1 / 9</div>
+<div class="slide s-mod">
+<div style="width:100%;max-width:1200px;">
+<div class="sec-head"><span class="tag">Funcionalidades</span><h2>Modulos do <em>3S Eats</em></h2><p>Cada modulo pode ser ativado conforme a necessidade do restaurante</p></div>
+<div class="mgrid">
+<div class="mcard"><div class="mi ic-r">&#x1F37D;</div><h3>Pedido na Mesa</h3><p>QR Code, cardapio digital, personalizacao e pagamento integrado.</p><ul><li>QR Code por mesa</li><li>Aprovacao no PDV</li><li>Divisao de conta</li><li>Cupons e sugestoes</li><li>Integracao com cozinha</li></ul></div>
+<div class="mcard"><div class="mi ic-o">&#x1F6F5;</div><h3>Delivery</h3><p>App proprio, sem taxas de marketplace, com rastreamento.</p><ul><li>Cardapio proprio</li><li>Rastreamento</li><li>Multi-unidade</li><li>Cupons e promocoes</li><li>Emissao de NF</li></ul></div>
+<div class="mcard"><div class="mi ic-g">&#x1F4B0;</div><h3>Pagamento na Mesa</h3><p>Fechamento rapido via celular: PIX, cartao, carteira digital.</p><ul><li>Pagamento parcial</li><li>Pagamento por itens</li><li>PIX, cartao, wallet</li><li>CPF na NF</li><li>Mesa libera sozinha</li></ul></div>
+<div class="mcard"><div class="mi ic-b">&#x1F3EA;</div><h3>Retirada</h3><p>Take-away com status e alerta quando o pedido fica pronto.</p><ul><li>Pedido antecipado</li><li>Alerta de pronto</li><li>Personalizacao</li><li>Pagamento online</li><li>Sem filas</li></ul></div>
+</div></div>
+</div>
 
-<div class="slides-container" id="slidesContainer">
+<div class="slide s-ifp">
+<div class="ifgrid"><div>
+<h2>O poder do <em>iFood Pago</em> integrado ao 3S Eats</h2>
+<p class="sub">O iFood Pago e o meio de pagamento digital do ecossistema iFood, agora disponivel para clientes 3S Eats.</p>
+<div class="blist">
+<div class="bitem"><div class="bi">&#x1F6E1;</div><div><h4>Chargeback Incluso</h4><p>A taxa ja contempla protecao contra chargeback.</p></div></div>
+<div class="bitem"><div class="bi">&#x1F50D;</div><div><h4>Analise de Fraude</h4><p>Antifraude em tempo real para cada transacao.</p></div></div>
+<div class="bitem"><div class="bi">&#x26A1;</div><div><h4>Liquidacao Rapida</h4><p>Recebimento D0, D15 ou D30.</p></div></div>
+</div></div><div class="hboxes">
+<div class="hbox"><div class="bn">100%</div><div class="lb">Digital e integrado ao app</div></div>
+<div class="hbox hbox-r"><div class="bn">0</div><div class="lb">Maquininhas necessarias</div></div>
+<div class="hbox"><div class="bn">&#x2714;</div><div class="lb">PIX, Credito, Debito e Carteiras Digitais</div></div>
+</div></div>
+</div>
 
-  <!-- SLIDE 1 — CAPA (fundo escuro como o material original) -->
-  <section class="slide slide-capa active" id="slide-1">
-    <div class="logo-container animate-in delay-1">
-      <div class="logo-box logo-3s">3S</div>
-      <span class="logo-plus">+</span>
-      <div class="logo-box logo-ifood">iFood</div>
-    </div>
-    <h1 class="capa-title animate-in delay-2">
-      3S Eats <span>+ iFood Pago</span>
-    </h1>
-    <p class="capa-subtitle animate-in delay-3">
-      Solucao completa de pedidos e pagamento digital para restaurantes.
-      Tecnologia white-label com o poder do iFood Pago integrado.
-    </p>
-    <div class="capa-badge animate-in delay-4">Material Comercial</div>
-  </section>
+<div class="slide s-pq">
+<div style="width:100%;max-width:1100px;">
+<div class="sec-head"><span class="tag">Vantagens</span><h2>Por que o <em>iFood Pago</em>?</h2><p>Tudo em uma unica taxa, sem surpresas</p></div>
+<div class="pqgrid">
+<div class="pqcard"><div class="icon">&#x1F6E1;</div><h3>Chargeback Zero</h3><p>O iFood Pago assume o risco. Sua taxa ja inclui essa protecao.</p></div>
+<div class="pqcard"><div class="icon">&#x1F50E;</div><h3>Antifraude Inteligente</h3><p>Analise em tempo real com tecnologia do ecossistema iFood.</p></div>
+<div class="pqcard"><div class="icon">&#x1F4CA;</div><h3>Gestao Unificada</h3><p>Dashboard unico para vendas, transacoes e recebimentos.</p></div>
+<div class="pqcard"><div class="icon">&#x1F4B8;</div><h3>Sem Custos Ocultos</h3><p>Sem adesao, sem aluguel. Paga apenas a taxa.</p></div>
+<div class="pqcard"><div class="icon">&#x1F504;</div><h3>Flexibilidade</h3><p>Receba em D0, D15 ou D30.</p></div>
+<div class="pqcard"><div class="icon">&#x1F91D;</div><h3>Taxas Negociaveis</h3><p>Ajustaveis conforme volume e numero de lojas.</p></div>
+</div></div>
+</div>
 
-  <!-- SLIDE 2 — O QUE É 3S EATS (fundo branco) -->
-  <section class="slide slide-oque" id="slide-2">
-    <div class="content-split">
-      <div class="content-left">
-        <h2 class="animate-in delay-1">O que e o <span>3S Eats</span>?</h2>
-        <p class="animate-in delay-2">
-          O 3S Eats e a solucao personalizada para restaurantes, com modulos de entrega, retirada, pedido na mesa e pagamento. Um Super App white-label que se adapta a qualquer modelo de restaurante.
-        </p>
-        <p class="animate-in delay-3">
-          Altamente personalizavel e parametrizavel, o app carrega a identidade da sua marca: logo, cores, banners, textos — tudo customizado.
-        </p>
-        <div class="feature-pills animate-in delay-4">
-          <span class="pill pill-delivery">Delivery</span>
-          <span class="pill pill-mesa">Pedido na Mesa</span>
-          <span class="pill pill-pgto">Pagamento</span>
-          <span class="pill pill-retirada">Retirada</span>
-        </div>
-      </div>
-      <div class="content-right">
-        <div class="stat-card animate-in delay-2">
-          <div class="stat-icon stat-icon-red">&#x1F4F1;</div>
-          <div class="stat-info">
-            <h4>White-Label Completo</h4>
-            <p>App com a marca do restaurante na App Store e Google Play</p>
-          </div>
-        </div>
-        <div class="stat-card animate-in delay-3">
-          <div class="stat-icon stat-icon-orange">&#x2699;</div>
-          <div class="stat-info">
-            <h4>Super App Adaptativo</h4>
-            <p>Responsivo e funcional em qualquer dispositivo</p>
-          </div>
-        </div>
-        <div class="stat-card animate-in delay-4">
-          <div class="stat-icon stat-icon-green">&#x1F4B3;</div>
-          <div class="stat-info">
-            <h4>Pagamento Integrado</h4>
-            <p>iFood Pago embutido para pagamentos seguros</p>
-          </div>
-        </div>
-        <div class="stat-card animate-in delay-5">
-          <div class="stat-icon stat-icon-blue">&#x1F310;</div>
-          <div class="stat-info">
-            <h4>Multi-Unidade</h4>
-            <p>Gerencie todas as lojas em um so lugar</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="slide s-comp">
+<div style="width:100%;max-width:800px;">
+<div class="sec-head"><span class="tag">Comparativo</span><h2>Taxas: <em>Media de Mercado</em> vs. iFood Pago</h2><p>Com base nas taxas padrao dos principais adquirentes</p></div>
+<div class="twrap"><table class="ttable">
+<thead><tr><th>Modalidade</th><th>Media de Mercado</th><th class="hl">iFood Pago</th></tr></thead>
+<tbody>
+<tr><td>Credito a Vista (D30)</td><td>4,49%</td><td class="hl">3,99% <span class="eco">-0,50 p.p.</span></td></tr>
+<tr><td>Credito a Vista (D0)</td><td>5,84%</td><td class="hl">5,59% <span class="eco">-0,25 p.p.</span></td></tr>
+<tr><td>Credito Parcelado 2-6x</td><td>5,65%</td><td class="hl">5,49% <span class="eco">-0,16 p.p.</span></td></tr>
+<tr><td>Credito Parcelado 7-12x</td><td>6,65%</td><td class="hl">6,49% <span class="eco">-0,16 p.p.</span></td></tr>
+<tr><td>Debito (D1)</td><td>2,47%</td><td class="hl">1,99% <span class="eco">-0,48 p.p.</span></td></tr>
+<tr><td>PIX (D0)</td><td>1,15%</td><td class="hl">0,99% <span class="eco">-0,16 p.p.</span></td></tr>
+</tbody></table></div>
+<p class="tnote">* Taxas padrao dos principais adquirentes (e-commerce). iFood Pago ja inclui chargeback e antifraude.</p>
+</div>
+</div>
 
-  <!-- SLIDE 3 — MÓDULOS (fundo cinza claro) -->
-  <section class="slide slide-modulos" id="slide-3">
-    <div style="width:100%;max-width:1200px;">
-      <div class="section-header">
-        <span class="tag animate-in delay-1">Funcionalidades</span>
-        <h2 class="animate-in delay-2">Modulos do <span>3S Eats</span></h2>
-        <p class="animate-in delay-3">Cada modulo pode ser ativado conforme a necessidade do restaurante</p>
-      </div>
-      <div class="modulos-grid">
-        <div class="modulo-card animate-in delay-2">
-          <div class="modulo-icon stat-icon-red">&#x1F37D;</div>
-          <h3>Pedido na Mesa</h3>
-          <p>QR Code na mesa, cardapio digital, personalizacao de itens e pagamento integrado.</p>
-          <ul>
-            <li>QR Code por mesa</li>
-            <li>Aprovacao de pedidos no PDV</li>
-            <li>Divisao de conta</li>
-            <li>Cupons e sugestoes</li>
-            <li>Integracao com a cozinha</li>
-          </ul>
-        </div>
-        <div class="modulo-card animate-in delay-3">
-          <div class="modulo-icon stat-icon-orange">&#x1F6F5;</div>
-          <h3>Delivery</h3>
-          <p>App de delivery proprio, sem taxas de marketplace, com rastreamento e multiplas formas de pagamento.</p>
-          <ul>
-            <li>Cardapio proprio para delivery</li>
-            <li>Rastreamento de pedido</li>
-            <li>Multi-unidade</li>
-            <li>Cupons e promocoes</li>
-            <li>Emissao de NF por email</li>
-          </ul>
-        </div>
-        <div class="modulo-card animate-in delay-4">
-          <div class="modulo-icon stat-icon-green">&#x1F4B0;</div>
-          <h3>Pagamento na Mesa</h3>
-          <p>Fechamento de mesa rapido via celular: PIX, cartao, carteira digital. Sem fila no caixa.</p>
-          <ul>
-            <li>Pagamento parcial</li>
-            <li>Pagamento por itens</li>
-            <li>PIX, cartao, carteira digital</li>
-            <li>CPF na NF automatico</li>
-            <li>Mesa libera sozinha</li>
-          </ul>
-        </div>
-        <div class="modulo-card animate-in delay-5">
-          <div class="modulo-icon stat-icon-blue">&#x1F3EA;</div>
-          <h3>Retirada</h3>
-          <p>Modelo take-away com acompanhamento de status e alerta quando o pedido fica pronto.</p>
-          <ul>
-            <li>Pedido antecipado</li>
-            <li>Alerta de pronto</li>
-            <li>Personalizacao de itens</li>
-            <li>Pagamento online</li>
-            <li>Sem filas</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="slide s-inc">
+<div style="width:100%;max-width:1100px;">
+<div class="sec-head"><span class="tag">Transparencia</span><h2>O que esta <em>incluso</em> na taxa</h2><p>Uma taxa, diversos servicos embutidos</p></div>
+<div class="incgrid"><div>
+<p>A taxa do iFood Pago ja contempla servicos que normalmente sao cobrados a parte.</p>
+<p>O valor que voce ve e o valor real — sem taxas escondidas.</p>
+<div class="ilist">
+<div class="iitem"><span class="ic">&#x1F6E1;</span><span>Protecao contra chargeback</span></div>
+<div class="iitem"><span class="ic">&#x1F50D;</span><span>Analise de fraude em tempo real</span></div>
+<div class="iitem"><span class="ic">&#x1F4B3;</span><span>Gateway de pagamento integrado</span></div>
+<div class="iitem"><span class="ic">&#x2699;</span><span>Seguranca e compliance</span></div>
+<div class="iitem"><span class="ic">&#x1F4CA;</span><span>Dashboard financeiro</span></div>
+<div class="iitem"><span class="ic">&#x1F4B0;</span><span>Zero custo de maquininha</span></div>
+</div></div><div>
+<div class="callout"><h3>Por que as taxas online sao diferentes?</h3><p>Transacoes digitais envolvem seguranca adicional. No iFood Pago, tudo ja vem incluso.</p><div class="hl2">Taxa competitiva + servicos inclusos = menos custo total</div></div>
+<div class="callout" style="margin-top:14px;"><h3>Taxas negociaveis</h3><p>Para redes com maior volume, taxas ajustaveis conforme faturamento e unidades.</p></div>
+</div></div></div>
+</div>
 
-  <!-- SLIDE 4 — IFOOD PAGO (fundo branco) -->
-  <section class="slide slide-ifoodpago" id="slide-4">
-    <div class="ifood-hero">
-      <div class="ifood-left">
-        <h2 class="animate-in delay-1">O poder do <span>iFood Pago</span> integrado ao 3S Eats</h2>
-        <p class="subtitle animate-in delay-2">
-          O iFood Pago e o meio de pagamento digital do ecossistema iFood, agora disponivel para os clientes 3S Eats. Seguranca, agilidade e taxas competitivas em uma unica integracao.
-        </p>
-        <div class="benefit-list">
-          <div class="benefit-item animate-in delay-3">
-            <div class="benefit-icon">&#x1F6E1;</div>
-            <div class="benefit-text">
-              <h4>Chargeback Incluso</h4>
-              <p>A taxa ja contempla protecao contra chargeback. O restaurante nao precisa se preocupar com estornos fraudulentos.</p>
-            </div>
-          </div>
-          <div class="benefit-item animate-in delay-4">
-            <div class="benefit-icon">&#x1F50D;</div>
-            <div class="benefit-text">
-              <h4>Analise de Fraude</h4>
-              <p>Sistema antifraude robusto integrado, com analise de risco em tempo real para cada transacao.</p>
-            </div>
-          </div>
-          <div class="benefit-item animate-in delay-5">
-            <div class="benefit-icon">&#x26A1;</div>
-            <div class="benefit-text">
-              <h4>Liquidacao Rapida</h4>
-              <p>Opcoes de recebimento D0, D15 e D30 conforme a necessidade do restaurante.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ifood-right">
-        <div class="highlight-box animate-in delay-3">
-          <div class="big-number">100%</div>
-          <div class="label">Digital e integrado ao app</div>
-        </div>
-        <div class="highlight-box highlight-box-red animate-in delay-4">
-          <div class="big-number">0</div>
-          <div class="label">Maquininhas necessarias</div>
-        </div>
-        <div class="highlight-box animate-in delay-5">
-          <div class="big-number">&#x2714;</div>
-          <div class="label">PIX, Credito, Debito e Carteiras Digitais</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="slide s-oferta">
+<div class="sec-head"><span class="tag">Oferta Especial</span><h2>Nossa <em>Proposta</em></h2><p>Adote o iFood Pago e ganhe o 3S Eats gratuitamente</p></div>
+<div class="ogrid">
+<div class="ocard ocard-l"><h3>3S Eats — Super App</h3><p class="d">Todos os modulos em um app white-label</p><p class="po">R$ 300,00/mes por unidade</p><p class="pf">GRATIS</p><p class="pc">para clientes que aderirem ao iFood Pago</p><ul class="ofl"><li>Delivery + Pedido na Mesa + Pagamento + Retirada</li><li>App com a sua marca</li><li>App Store e Google Play</li><li>Cardapio personalizavel</li><li>Multi-unidade</li><li>Suporte dedicado</li></ul></div>
+<div class="ocard ocard-r"><div class="obadge">O que voce contrata</div><h3 style="margin-top:10px">iFood Pago</h3><p class="d">Meio de pagamento integrado</p><p class="pt">Apenas a taxa sobre o transacionado</p><p class="pm">a partir de 0,99%</p><p class="pd">Taxas variam por modalidade.<br>Negociavel conforme volume.</p><ul class="ofl"><li>Credito, Debito, PIX, Wallets</li><li>Chargeback incluso</li><li>Antifraude em tempo real</li><li>Sem maquininha</li><li>Sem taxa de adesao</li><li>Liquidacao D0, D15 ou D30</li></ul></div>
+</div>
+<div class="setup"><p><strong>Setup unico:</strong> R$ 2.000,00 — Publicacao nas lojas oficiais</p></div>
+</div>
 
-  <!-- SLIDE 5 — POR QUE IFOOD PAGO (fundo cinza claro) -->
-  <section class="slide slide-porque" id="slide-5">
-    <div style="width:100%;max-width:1100px;">
-      <div class="section-header">
-        <span class="tag animate-in delay-1">Vantagens Competitivas</span>
-        <h2 class="animate-in delay-2">Por que o <span>iFood Pago</span>?</h2>
-        <p class="animate-in delay-3">Tudo o que voce precisa em uma unica taxa, sem surpresas</p>
-      </div>
-      <div class="porque-grid">
-        <div class="porque-card animate-in delay-2">
-          <div class="icon">&#x1F6E1;</div>
-          <h3>Chargeback Zero para o Restaurante</h3>
-          <p>Diferente dos adquirentes tradicionais, o iFood Pago assume o risco de chargeback. Sua taxa ja inclui essa protecao.</p>
-        </div>
-        <div class="porque-card animate-in delay-3">
-          <div class="icon">&#x1F50E;</div>
-          <h3>Antifraude Inteligente</h3>
-          <p>Analise de fraude em tempo real com a mesma tecnologia que protege milhoes de transacoes no ecossistema iFood.</p>
-        </div>
-        <div class="porque-card animate-in delay-4">
-          <div class="icon">&#x1F4CA;</div>
-          <h3>Gestao Unificada</h3>
-          <p>Dashboard unico para acompanhar vendas, transacoes e recebimentos de todas as unidades.</p>
-        </div>
-        <div class="porque-card animate-in delay-3">
-          <div class="icon">&#x1F4B8;</div>
-          <h3>Sem Custos Ocultos</h3>
-          <p>Nao ha taxas de adesao, aluguel de maquininha ou custos adicionais. Paga apenas a taxa sobre o transacionado.</p>
-        </div>
-        <div class="porque-card animate-in delay-4">
-          <div class="icon">&#x1F504;</div>
-          <h3>Flexibilidade de Recebimento</h3>
-          <p>Escolha entre receber em D0, D15 ou D30. A taxa se ajusta conforme o prazo escolhido.</p>
-        </div>
-        <div class="porque-card animate-in delay-5">
-          <div class="icon">&#x1F91D;</div>
-          <h3>Taxas Negociaveis</h3>
-          <p>Para grandes redes, as taxas sao negociaveis com base no volume de faturamento e numero de lojas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="slide s-contato">
+<h2>Vamos <em>comecar</em>?</h2>
+<p class="sub">Entre em contato para uma proposta personalizada.</p>
+<div class="clinks"><a href="https://3scheckout.com.br" target="_blank"><span>&#x1F310;</span> 3scheckout.com.br</a><a href="https://instagram.com/3scheckout" target="_blank"><span>&#x1F4F7;</span> @3scheckout</a></div>
+</div>
 
-  <!-- SLIDE 6 — COMPARATIVO SIMPLIFICADO: MÉDIA DE MERCADO vs IFOOD PAGO -->
-  <section class="slide slide-comparativo" id="slide-6">
-    <div style="width:100%;max-width:800px;">
-      <div class="section-header">
-        <span class="tag animate-in delay-1">Comparativo de Mercado</span>
-        <h2 class="animate-in delay-2">Taxas: <span>Media de Mercado</span> vs. iFood Pago</h2>
-        <p class="animate-in delay-3">Comparativo com base nas taxas padrao praticadas pelos principais adquirentes do mercado</p>
-      </div>
-      <div class="table-wrapper animate-in delay-4">
-        <table class="taxa-table">
-          <thead>
-            <tr>
-              <th>Modalidade</th>
-              <th class="avg-col">Media de Mercado</th>
-              <th class="highlight-col">iFood Pago</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Credito a Vista (D30)</td>
-              <td class="avg-col">4,49%</td>
-              <td class="highlight-col">3,99% <span class="economia">-0,50 p.p.</span></td>
-            </tr>
-            <tr>
-              <td>Credito a Vista (D0)</td>
-              <td class="avg-col">5,84%</td>
-              <td class="highlight-col">5,59% <span class="economia">-0,25 p.p.</span></td>
-            </tr>
-            <tr>
-              <td>Credito Parcelado 2-6x (D30)</td>
-              <td class="avg-col">5,65%</td>
-              <td class="highlight-col">5,49% <span class="economia">-0,16 p.p.</span></td>
-            </tr>
-            <tr>
-              <td>Credito Parcelado 7-12x (D30)</td>
-              <td class="avg-col">6,65%</td>
-              <td class="highlight-col">6,49% <span class="economia">-0,16 p.p.</span></td>
-            </tr>
-            <tr>
-              <td>Debito (D1)</td>
-              <td class="avg-col">2,47%</td>
-              <td class="highlight-col">1,99% <span class="economia">-0,48 p.p.</span></td>
-            </tr>
-            <tr>
-              <td>PIX (D0)</td>
-              <td class="avg-col">1,15%</td>
-              <td class="highlight-col">0,99% <span class="economia">-0,16 p.p.</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-note animate-in delay-5">
-        * Taxas padrao praticadas pelos principais adquirentes para transacoes online (e-commerce).<br>
-        A taxa do iFood Pago ja inclui protecao contra chargeback e antifraude — servicos cobrados a parte pelos demais adquirentes.
-      </div>
-      <div class="table-legend animate-in delay-5">
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--green);"></div>
-          <span>iFood Pago (chargeback + antifraude inclusos)</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background: var(--text-secondary);"></div>
-          <span>Media de Mercado (sem chargeback incluso)</span>
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <!-- SLIDE 7 — O QUE ESTÁ INCLUSO NA TAXA -->
-  <section class="slide slide-incluso" id="slide-7">
-    <div class="section-header">
-      <span class="tag animate-in delay-1">Transparencia</span>
-      <h2 class="animate-in delay-2">O que esta <span>incluso</span> na taxa</h2>
-      <p class="animate-in delay-3">Uma taxa, diversos servicos embutidos — sem custos adicionais ou surpresas</p>
-    </div>
-    <div class="incluso-content">
-      <div class="incluso-left">
-        <p class="animate-in delay-2">
-          Diferente de outros meios de pagamento, a taxa do iFood Pago ja contempla uma serie de servicos que normalmente sao cobrados a parte ou exigem contratacoes separadas.
-        </p>
-        <p class="animate-in delay-3">
-          Isso significa que o valor que voce ve na tabela e o valor real — sem taxas escondidas, sem adicional de antifraude e sem custo extra por chargeback.
-        </p>
-        <div class="included-list">
-          <div class="included-item animate-in delay-3">
-            <span class="icon">&#x1F6E1;</span>
-            <span>Protecao contra chargeback</span>
-          </div>
-          <div class="included-item animate-in delay-3">
-            <span class="icon">&#x1F50D;</span>
-            <span>Analise de fraude em tempo real</span>
-          </div>
-          <div class="included-item animate-in delay-4">
-            <span class="icon">&#x1F4B3;</span>
-            <span>Gateway de pagamento integrado</span>
-          </div>
-          <div class="included-item animate-in delay-4">
-            <span class="icon">&#x2699;</span>
-            <span>Infraestrutura de seguranca e compliance</span>
-          </div>
-          <div class="included-item animate-in delay-5">
-            <span class="icon">&#x1F4CA;</span>
-            <span>Dashboard de gestao financeira</span>
-          </div>
-          <div class="included-item animate-in delay-5">
-            <span class="icon">&#x1F4B0;</span>
-            <span>Zero custo de maquininha ou adesao</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="incluso-callout animate-in delay-3">
-          <h3>Por que as taxas online sao diferentes?</h3>
-          <p>
-            As transacoes digitais envolvem camadas adicionais de seguranca: validacao de identidade, prevencao de fraude e protecao contra estornos indevidos. Esses servicos sao parte essencial de qualquer operacao de pagamento online e estao refletidos na composicao da taxa.
-          </p>
-          <p style="margin-top: 12px;">
-            No iFood Pago, todos esses servicos ja vem inclusos, simplificando a gestao financeira e evitando custos dispersos com fornecedores diferentes.
-          </p>
-          <div class="highlight-text">Taxa competitiva + servicos inclusos = menos custo total</div>
-        </div>
-        <div class="incluso-callout animate-in delay-4" style="margin-top: 16px;">
-          <h3>Taxas negociaveis</h3>
-          <p>
-            Para redes com maior volume de transacoes, as taxas podem ser ajustadas conforme o faturamento e o numero de unidades. Converse com nosso time para uma proposta personalizada.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+var cur = 0;
+var total = 9;
+var sliding = false;
+var slideMode = true;
 
-  <!-- SLIDE 8 — OFERTA: 3S EATS GRÁTIS COM IFOOD PAGO (fundo escuro como seção de transição) -->
-  <section class="slide slide-proposta" id="slide-8">
-    <div class="section-header">
-      <span class="tag animate-in delay-1">Oferta Especial</span>
-      <h2 class="animate-in delay-2">Nossa <span>Proposta</span></h2>
-      <p class="animate-in delay-3">Adote o iFood Pago e ganhe o 3S Eats gratuitamente</p>
-    </div>
-    <div class="oferta-container">
-      <div class="oferta-valor animate-in delay-3">
-        <h3>3S Eats  
+function go() {
+  document.getElementById('c').style.transform = 'translateY(-' + (cur * 100) + 'vh)';
+  document.getElementById('cnt').textContent = (cur+1) + ' / ' + total;
+  document.getElementById('prog').style.width = (((cur+1)/total)*100) + '%';
+}
+function next() { if (sliding||cur>=total-1) return; sliding=true; cur++; go(); setTimeout(function(){sliding=false},700); }
+function prev() { if (sliding||cur<=0) return; sliding=true; cur--; go(); setTimeout(function(){sliding=false},700); }
+function setMode(m) {
+  slideMode=(m==='slide');
+  if(slideMode){document.body.classList.remove('scroll-mode');go();}
+  else{document.body.classList.add('scroll-mode');}
+  document.getElementById('bSlide').className=slideMode?'on':'';
+  document.getElementById('bScroll').className=slideMode?'':'on';
+}
+document.addEventListener('keydown',function(e){
+  if(!slideMode)return;
+  if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}
+  if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();prev();}
+});
+document.addEventListener('wheel',function(e){
+  if(!slideMode)return;
+  e.preventDefault();
+  if(e.deltaY>0)next();else prev();
+},{passive:false});
+var ty=0;
+document.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',function(e){if(!slideMode)return;var d=ty-e.changedTouches[0].clientY;if(d>50)next();if(d<-50)prev();},{passive:true});
+go();
+</script>
+</body>
+</html>
