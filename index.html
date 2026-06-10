@@ -490,7 +490,7 @@
   .delay-6 { animation-delay: 0.6s !important; }
   body.scroll-mode .animate-in { opacity: 1; animation: none; }
 
-  /* ===== RESPONSIVE ===== */
+  /* ===== RESPONSIVE — TABLET ===== */
   @media (max-width: 1024px) {
     .slide { padding: 40px 24px; }
     .content-split, .ifood-hero, .incluso-content, .oferta-container { grid-template-columns: 1fr; gap: 36px; }
@@ -498,6 +498,122 @@
     .porque-grid { grid-template-columns: 1fr; }
     .capa-title { font-size: 36px; }
     .content-left h2, .ifood-left h2, .incluso-left h2 { font-size: 28px; }
+  }
+
+  /* ===== RESPONSIVE — MOBILE ===== */
+  @media (max-width: 768px) {
+    /* Permitir scroll dentro de cada slide no modo slides */
+    .slide {
+      padding: 30px 20px;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      align-items: flex-start;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Wrapper interno para dar padding top/bottom */
+    .slide > * { width: 100%; }
+
+    /* CAPA */
+    .capa-title { font-size: 28px; }
+    .capa-subtitle { font-size: 16px; max-width: 100%; }
+    .capa-badge { font-size: 11px; padding: 8px 18px; margin-top: 28px; }
+    .logo-box { width: 56px; height: 56px; font-size: 16px; border-radius: 14px; }
+    .logo-plus { font-size: 24px; }
+    .logo-container { gap: 14px; margin-bottom: 24px; }
+    .slide-capa { padding-top: 80px; }
+
+    /* O QUE É */
+    .content-split { gap: 28px; }
+    .content-left h2 { font-size: 24px; }
+    .content-left p { font-size: 14px; }
+    .feature-pills { gap: 8px; margin-top: 16px; }
+    .pill { padding: 8px 14px; font-size: 12px; }
+    .stat-card { padding: 16px 18px; gap: 14px; }
+    .stat-icon { width: 40px; height: 40px; font-size: 18px; border-radius: 10px; }
+    .stat-info h4 { font-size: 14px; }
+    .stat-info p { font-size: 12px; }
+
+    /* MÓDULOS */
+    .modulos-grid { grid-template-columns: 1fr; gap: 16px; }
+    .modulo-card { padding: 22px 18px; }
+    .modulo-icon { width: 48px; height: 48px; font-size: 22px; margin-bottom: 14px; }
+    .modulo-card h3 { font-size: 16px; }
+    .modulo-card p { font-size: 12px; }
+    .modulo-card ul li { font-size: 12px; }
+    .section-header { margin-bottom: 28px; }
+    .section-header h2 { font-size: 24px; }
+    .section-header p { font-size: 14px; }
+    .section-header .tag { font-size: 10px; padding: 5px 14px; }
+
+    /* IFOOD PAGO */
+    .ifood-hero { gap: 28px; }
+    .ifood-left h2 { font-size: 24px; }
+    .ifood-left .subtitle { font-size: 14px; margin-bottom: 20px; }
+    .benefit-item { padding: 12px 14px; gap: 12px; }
+    .benefit-icon { width: 34px; height: 34px; font-size: 16px; }
+    .benefit-text h4 { font-size: 13px; }
+    .benefit-text p { font-size: 12px; }
+    .highlight-box { padding: 20px; }
+    .highlight-box .big-number { font-size: 32px; }
+    .highlight-box .label { font-size: 12px; }
+
+    /* POR QUE IFOOD PAGO */
+    .porque-grid { gap: 14px; }
+    .porque-card { padding: 20px; }
+    .porque-card .icon { font-size: 24px; margin-bottom: 10px; }
+    .porque-card h3 { font-size: 15px; }
+    .porque-card p { font-size: 12px; }
+
+    /* COMPARATIVO */
+    .slide-comparativo { padding: 30px 16px; }
+    .table-wrapper { overflow-x: auto; }
+    .taxa-table { font-size: 12px; }
+    .taxa-table thead th { padding: 10px 12px; font-size: 11px; }
+    .taxa-table tbody td { padding: 10px 12px; }
+    .taxa-table tbody td .economia { font-size: 10px; }
+    .table-note { font-size: 11px; }
+
+    /* O QUE ESTÁ INCLUSO */
+    .incluso-content { gap: 24px; }
+    .incluso-left h2 { font-size: 22px; }
+    .incluso-left p { font-size: 13px; }
+    .included-item { padding: 10px 14px; gap: 10px; }
+    .included-item span { font-size: 13px; }
+    .included-item .icon { font-size: 16px; }
+    .incluso-callout { padding: 20px; }
+    .incluso-callout h3 { font-size: 16px; }
+    .incluso-callout p { font-size: 13px; }
+    .incluso-callout .highlight-text { font-size: 12px; padding: 8px 16px; }
+
+    /* OFERTA */
+    .oferta-container { gap: 24px; }
+    .oferta-valor, .oferta-ifoodpago { padding: 28px 22px; }
+    .oferta-valor h3, .oferta-ifoodpago h3 { font-size: 18px; }
+    .oferta-valor .price-original { font-size: 15px; }
+    .oferta-valor .price-free { font-size: 34px; }
+    .oferta-valor .price-condition { font-size: 12px; }
+    .oferta-ifoodpago .price-main { font-size: 28px; }
+    .oferta-ifoodpago .price-taxa { font-size: 13px; }
+    .oferta-ifoodpago .price-detail { font-size: 12px; }
+    .oferta-ifoodpago .oferta-badge { font-size: 11px; padding: 5px 16px; }
+    .oferta-features li { font-size: 12px; padding: 6px 0; }
+    .setup-info { padding: 14px 20px; margin-top: 20px; }
+    .setup-info p { font-size: 12px; }
+
+    /* CONTATO */
+    .contato-title { font-size: 30px; }
+    .contato-sub { font-size: 15px; margin-bottom: 32px; }
+    .contato-links { flex-direction: column; gap: 12px; }
+    .contato-link { font-size: 14px; padding: 14px 22px; justify-content: center; }
+
+    /* NAVEGAÇÃO */
+    .nav-arrows { bottom: 16px; }
+    .nav-arrows button { width: 40px; height: 40px; font-size: 16px; }
+    .slide-counter { bottom: 24px; right: 16px; font-size: 12px; }
+    .mode-toggle { top: 12px; right: 12px; }
+    .mode-toggle button { padding: 6px 12px; font-size: 12px; }
   }
 </style>
 </head>
@@ -880,122 +996,4 @@
     </div>
     <div class="oferta-container">
       <div class="oferta-valor animate-in delay-3">
-        <h3>3S Eats — Super App</h3>
-        <p class="desc">Todos os modulos em um unico app white-label</p>
-        <div class="price-original">de R$ 300,00/mes por unidade</div>
-        <div class="price-free">GRATIS</div>
-        <p class="price-condition">para clientes que aderirem ao iFood Pago</p>
-        <ul class="oferta-features">
-          <li>Delivery + Pedido na Mesa + Pagamento + Retirada</li>
-          <li>App White-Label com a sua marca</li>
-          <li>Publicacao na App Store e Google Play</li>
-          <li>Cardapio digital personalizavel</li>
-          <li>Multi-unidade</li>
-          <li>Suporte dedicado</li>
-        </ul>
-      </div>
-      <div class="oferta-ifoodpago animate-in delay-4">
-        <div class="oferta-badge">O que voce contrata</div>
-        <h3>iFood Pago</h3>
-        <p class="desc">Meio de pagamento integrado ao app</p>
-        <p class="price-taxa">Apenas a taxa sobre o transacionado</p>
-        <div class="price-main">a partir de 0,99%</div>
-        <p class="price-detail">Taxas variam por modalidade (credito, debito, PIX).<br>Negociavel conforme volume.</p>
-        <ul class="oferta-features">
-          <li>Credito, Debito, PIX, Carteiras Digitais</li>
-          <li>Chargeback incluso na taxa</li>
-          <li>Antifraude em tempo real</li>
-          <li>Sem aluguel de maquininha</li>
-          <li>Sem taxa de adesao</li>
-          <li>Liquidacao D0, D15 ou D30</li>
-        </ul>
-      </div>
-    </div>
-    <div class="setup-info animate-in delay-5">
-      <p>
-        <strong>Setup unico:</strong> R$ 2.000,00 — Publicacao do app nas lojas oficiais com identidade completa do restaurante
-      </p>
-    </div>
-  </section>
-
-  <!-- SLIDE 9 — CONTATO (fundo branco) -->
-  <section class="slide slide-contato" id="slide-9">
-    <h2 class="contato-title animate-in delay-1">
-      Vamos <span>comecar</span>?
-    </h2>
-    <p class="contato-sub animate-in delay-2">
-      Entre em contato com nosso time comercial para uma proposta personalizada para sua rede.
-    </p>
-    <div class="contato-links animate-in delay-3">
-      <a href="https://3scheckout.com.br" class="contato-link" target="_blank">
-        <span class="icon">&#x1F310;</span>
-        3scheckout.com.br
-      </a>
-      <a href="https://instagram.com/3scheckout" class="contato-link" target="_blank">
-        <span class="icon">&#x1F4F7;</span>
-        @3scheckout
-      </a>
-    </div>
-  </section>
-
-</div>
-
-<script>
-  let currentSlide = 0;
-  const totalSlides = 9;
-  let isSlideMode = true;
-
-  function updateSlide() {
-    const container = document.getElementById('slidesContainer');
-    container.style.transform = `translateY(-${currentSlide * 100}vh)`;
-    document.querySelectorAll('.slide').forEach((s, i) => {
-      s.classList.toggle('active', i === currentSlide);
-    });
-    document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
-    document.getElementById('progressBar').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
-  }
-
-  function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); } }
-  function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
-
-  function setMode(mode) {
-    isSlideMode = mode === 'slide';
-    document.body.classList.toggle('scroll-mode', !isSlideMode);
-    document.getElementById('btnSlide').classList.toggle('active', isSlideMode);
-    document.getElementById('btnScroll').classList.toggle('active', !isSlideMode);
-    if (isSlideMode) {
-      updateSlide();
-    } else {
-      document.getElementById('slidesContainer').style.transform = 'none';
-      document.querySelectorAll('.slide').forEach(s => s.classList.add('active'));
-      document.getElementById('progressBar').style.width = '100%';
-    }
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (!isSlideMode) return;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextSlide(); }
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevSlide(); }
-  });
-
-  let wheelTimeout;
-  document.addEventListener('wheel', (e) => {
-    if (!isSlideMode) return;
-    e.preventDefault();
-    clearTimeout(wheelTimeout);
-    wheelTimeout = setTimeout(() => { e.deltaY > 0 ? nextSlide() : prevSlide(); }, 80);
-  }, { passive: false });
-
-  let touchStartY = 0;
-  document.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; });
-  document.addEventListener('touchend', (e) => {
-    if (!isSlideMode) return;
-    const diff = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
-  });
-
-  updateSlide();
-</script>
-
-</body>
-</html>
+        <h3>3S Eats  
