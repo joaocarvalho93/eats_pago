@@ -242,10 +242,72 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 .clinks { display:flex; gap:16px; }
 .clinks a { display:flex; align-items:center; gap:10px; padding:14px 24px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; text-decoration:none; color:var(--dark); font-size:14px; font-weight:500; }
 
+
+/* MERCADO */
+.s-mercado { background:var(--bg2); flex-direction:column; }
+.merc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; width:100%; max-width:1200px; }
+.merc-card { background:white; border:1px solid var(--border); border-radius:16px; padding:28px 22px; text-align:center; position:relative; }
+.merc-card .mn { font-size:42px; font-weight:900; line-height:1; margin-bottom:6px; }
+.merc-card .mn.red { color:var(--red); }
+.merc-card .mn.green { color:var(--green); }
+.merc-card .mn.orange { color:var(--orange); }
+.merc-card .mn.blue { color:#3B82F6; }
+.merc-card .ml { font-size:13px; font-weight:700; color:var(--dark); margin-bottom:4px; }
+.merc-card .md { font-size:11px; color:var(--text2); line-height:1.5; }
+.merc-src { font-size:10px; color:var(--text2); text-align:center; margin-top:20px; max-width:800px; line-height:1.6; }
+
+/* DESAFIO */
+.s-desafio { background:var(--dark); color:white; flex-direction:column; }
+.s-desafio .sec-head h2 { color:white; }
+.s-desafio .sec-head h2 em { color:var(--red); }
+.s-desafio .sec-head p { color:rgba(255,255,255,.55); }
+.s-desafio .sec-head .tag { background:rgba(234,29,44,.15); color:var(--red); }
+.des-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; width:100%; max-width:1100px; }
+.des-card { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:24px 20px; }
+.des-card .di { font-size:28px; margin-bottom:12px; }
+.des-card h3 { font-size:15px; font-weight:700; margin-bottom:8px; color:white; }
+.des-card p { font-size:12px; color:rgba(255,255,255,.5); line-height:1.6; }
+.des-card .dn { font-size:24px; font-weight:900; color:var(--red); margin-bottom:4px; }
+.des-bottom { margin-top:28px; padding:18px 28px; border-radius:12px; background:rgba(234,29,44,.08); border:1px solid rgba(234,29,44,.2); max-width:800px; text-align:center; }
+.des-bottom p { font-size:14px; color:rgba(255,255,255,.6); line-height:1.6; }
+.des-bottom strong { color:white; }
+.des-bottom em { color:var(--red); font-style:normal; font-weight:700; }
+
+/* GANHOS */
+.s-ganhos { background:white; flex-direction:column; }
+.gan-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; width:100%; max-width:1100px; }
+.gan-card { border:1px solid var(--border); border-radius:16px; padding:28px 24px; position:relative; overflow:hidden; }
+.gan-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--green); }
+.gan-card .gi { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.gan-card .gi span { font-size:24px; }
+.gan-card .gi h3 { font-size:16px; font-weight:700; }
+.gan-card p { font-size:13px; color:var(--text2); line-height:1.6; margin-bottom:10px; }
+.gan-card .gn { font-size:28px; font-weight:900; color:var(--green); }
+.gan-card .gs { font-size:11px; color:var(--text2); margin-top:2px; }
+.gan-card.highlight { background:var(--green-light); border-color:rgba(0,168,68,.3); }
+.gan-card.highlight::before { background:var(--green); height:4px; }
+
+/* POR QUE AGORA */
+.s-agora { background:var(--bg2); flex-direction:column; }
+.agora-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:50px; width:100%; max-width:1200px; align-items:center; }
+.agora-list { display:flex; flex-direction:column; gap:14px; }
+.agora-item { display:flex; align-items:flex-start; gap:14px; padding:16px 18px; background:white; border-radius:12px; border:1px solid var(--border); }
+.agora-item .ai-n { width:32px; height:32px; border-radius:50%; background:var(--red); color:white; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; flex-shrink:0; }
+.agora-item h4 { font-size:14px; font-weight:700; margin-bottom:3px; }
+.agora-item p { font-size:12px; color:var(--text2); line-height:1.5; }
+.agora-cta { display:flex; flex-direction:column; gap:16px; }
+.agora-box { background:white; border:1px solid var(--border); border-radius:14px; padding:24px; text-align:center; }
+.agora-box .ab-n { font-size:36px; font-weight:900; margin-bottom:4px; }
+.agora-box .ab-n.red { color:var(--red); }
+.agora-box .ab-n.green { color:var(--green); }
+.agora-box .ab-l { font-size:13px; color:var(--text2); }
+.agora-box .ab-d { font-size:11px; color:var(--text2); margin-top:6px; line-height:1.4; }
+
 @media(max-width:1024px) {
   .slide { padding:40px 24px; }
-  .split,.ifgrid,.incgrid,.ogrid,.efic-grid,.calc-wrap { grid-template-columns:1fr; gap:32px; }
-  .mgrid { grid-template-columns:repeat(2,1fr); }
+  .split,.ifgrid,.incgrid,.ogrid,.efic-grid,.calc-wrap,.agora-grid,.gan-grid { grid-template-columns:1fr; gap:32px; }
+  .mgrid,.merc-grid { grid-template-columns:repeat(2,1fr); }
+  .des-grid { grid-template-columns:1fr; }
   .pqgrid { grid-template-columns:1fr; }
   .s-capa h1 { font-size:34px; }
   .split h2,.ifgrid h2 { font-size:28px; }
@@ -257,22 +319,22 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 <div class="progress" id="prog"></div>
 <div class="mode-toggle"><button class="on" id="bSlide" onclick="setMode('slide')">Slides</button><button id="bScroll" onclick="setMode('scroll')">Scroll</button></div>
 <div class="nav-arrows"><button onclick="prev()">&#8592;</button><button onclick="next()">&#8594;</button></div>
-<div class="counter" id="cnt">1 / 11</div>
+<div class="counter" id="cnt">1 / 14</div>
 
 <div class="container" id="c">
 
 <div class="slide s-capa">
 <div class="logos"><div class="lbox l3s">3S</div><span class="lplus">+</span><div class="lbox lif">iFood</div></div>
 <h1>3S Eats <em>+ iFood Pago</em></h1>
-<p class="sub">Solução completa de pedidos e pagamento digital para restaurantes. Tecnologia white-label com o poder do iFood Pago integrado.</p>
+<p class="sub">Tecnologia e pagamento digital sob medida para operações que valorizam identidade e experiência. White-label com o poder do iFood Pago.</p>
 <div class="badge">Material Comercial</div>
 </div>
 
 <div class="slide s-oque">
 <div class="split"><div>
 <h2>O que é o <em>3S Eats</em>?</h2>
-<p>O 3S Eats é a solução personalizada para restaurantes, com módulos de entrega, retirada, pedido na mesa e pagamento. Um Super App white-label que se adapta a qualquer modelo de restaurante.</p>
-<p>Altamente personalizável e parametrizável, o app carrega a identidade da sua marca: logo, cores, banners, textos — tudo customizado.</p>
+<p>O 3S Eats é a solução para estabelecimentos que querem levar a experiência digital ao nível da experiência presencial. Um Super App white-label que carrega a identidade da sua marca em cada detalhe.</p>
+<p>Para quem construiu uma marca forte no atendimento e nos produtos, o app é uma extensão natural: logo, cores, cardápio com fotos — tudo com a cara do seu negócio.</p>
 <div class="pills"><span class="p1">Delivery</span><span class="p2">Pedido na Mesa</span><span class="p3">Pagamento</span><span class="p4">Retirada</span></div>
 </div><div class="cards">
 <div class="scard"><div class="ic ic-r">&#x1F4F1;</div><div><h4>White-Label Completo</h4><p class="t">App com a marca do restaurante na App Store e Google Play</p></div></div>
@@ -282,6 +344,31 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 </div></div>
 </div>
 
+
+<div class="slide s-mercado">
+<div style="width:100%;max-width:1200px;">
+<div class="sec-head"><span class="tag">Panorama</span><h2>O mercado de <em>padarias</em> no Brasil</h2><p>Um setor em transformação — e quem lidera, sai na frente</p></div>
+<div class="merc-grid">
+<div class="merc-card"><div class="mn red">R$ 150 bi</div><div class="ml">Faturamento Anual</div><div class="md">Setor de panificação e confeitaria é o 2º maior segmento da indústria alimentícia</div></div>
+<div class="merc-card"><div class="mn orange">70 mil+</div><div class="ml">Padarias no Brasil</div><div class="md">Mais de 800 mil empregos diretos gerados pelo setor em todo o país</div></div>
+<div class="merc-card"><div class="mn green">+22%</div><div class="ml">Crescimento do Delivery</div><div class="md">Pedidos digitais no food service cresceram mais de 22% em 2024 vs. 2023</div></div>
+<div class="merc-card"><div class="mn blue">63%</div><div class="ml">Preferem Pix/Digital</div><div class="md">Consumidores que preferem pagamento digital nas compras do dia a dia</div></div>
+</div>
+<p class="merc-src">Fontes: ABIP (Associação Brasileira da Indústria de Panificação), ABRASEL, Pesquisa Food Service 2024, Banco Central do Brasil</p>
+</div>
+</div>
+
+<div class="slide s-desafio">
+<div style="width:100%;max-width:1100px;">
+<div class="sec-head"><span class="tag">O Desafio</span><h2>Desafios de uma <em>operação robusta</em></h2><p>Mesmo quem opera bem enfrenta pressões que a tecnologia pode aliviar</p></div>
+<div class="des-grid">
+<div class="des-card"><div class="di">&#x1F4B8;</div><div class="dn">36%</div><h3>do faturamento vai para mão de obra</h3><p>Folha de pagamento + encargos CLT (~68% sobre o salário) são o maior custo operacional de uma padaria.</p></div>
+<div class="des-card"><div class="di">&#x1F4C9;</div><div class="dn">5-8%</div><h3>margem líquida média</h3><p>Com insumos, aluguel, energia e impostos, sobra pouco. Cada ponto percentual de economia faz diferença.</p></div>
+<div class="des-card"><div class="di">&#x23F3;</div><div class="dn">40 min</div><h3>tempo médio de ociosidade/garçom</h3><p>Em horários de vale, garçons ficam ociosos. No pico, faltam braços. O digital equilibra essa equação.</p></div>
+</div>
+<div class="des-bottom"><p>Operações consolidadas têm <strong>estrutura e qualidade como diferenciais</strong>. A tecnologia certa não muda isso — <em>potencializa, otimiza e libera a equipe para o que realmente importa</em>.</p></div>
+</div>
+</div>
 <div class="slide s-mod">
 <div style="width:100%;max-width:1200px;">
 <div class="sec-head"><span class="tag">Funcionalidades</span><h2>Módulos do <em>3S Eats</em></h2><p>Cada módulo pode ser ativado conforme a necessidade do restaurante</p></div>
@@ -323,21 +410,28 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 </div>
 
 <div class="slide s-comp">
-<div style="width:100%;max-width:800px;">
-<div class="sec-head"><span class="tag">Comparativo</span><h2>Taxas: <em>Média de Mercado</em> vs. iFood Pago</h2><p>Com base nas taxas padrão dos principais adquirentes</p></div>
+<div style="width:100%;max-width:900px;">
+<div class="sec-head"><span class="tag">Sua Proposta</span><h2>Taxas <em>iFood Pago</em> para sua operação</h2><p>Comparativo transparente entre as condições atuais e a proposta iFood Pago</p></div>
 <div class="twrap"><table class="ttable">
-<thead><tr><th>Modalidade</th><th>Média de Mercado</th><th class="hl">iFood Pago</th></tr></thead>
+<thead><tr><th>Modalidade</th><th>Condição Atual</th><th class="hl">iFood Pago</th><th>O que muda</th></tr></thead>
 <tbody>
-<tr><td>PIX</td><td>1,15%</td><td class="hl">0,99%<span class="eco">-0,16 p.p.</span></td></tr>
-<tr><td>Débito</td><td>2,47%</td><td class="hl">1,99%<span class="eco">-0,48 p.p.</span></td></tr>
-<tr><td>Crédito (D1)</td><td>5,84%</td><td class="hl">4,69%<span class="eco">-1,15 p.p.</span></td></tr>
-<tr><td>Crédito (D7)</td><td>5,20%</td><td class="hl">4,49%<span class="eco">-0,71 p.p.</span></td></tr>
-<tr><td>Crédito (D30)</td><td>4,49%</td><td class="hl">3,49%<span class="eco">-1,00 p.p.</span></td></tr>
+<tr><td>PIX</td><td>0,64%<br><span style="font-size:10px;color:var(--text2);">(limitado a R$ 0,20/tx)</span></td><td>0,64%</td><td style="font-size:11px;color:var(--text2);">Mesma taxa, sem cap por transação</td></tr>
+<tr><td>Débito</td><td>0,74%</td><td>1,00%</td><td style="font-size:11px;color:var(--text2);">+0,26 p.p. — inclui antifraude e chargeback</td></tr>
+<tr><td>Crédito (D30)</td><td>1,67%</td><td>2,10%</td><td style="font-size:11px;color:var(--text2);">+0,43 p.p. — inclui antifraude e chargeback</td></tr>
 </tbody></table></div>
-<p class="tnote">* Taxas padrão dos principais adquirentes (e-commerce). iFood Pago já inclui proteção contra desacordo comercial e antifraude.<br>* Taxas sujeitas a variação conforme CNAE do estabelecimento. Consulte condições específicas.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;max-width:900px;">
+<div style="padding:18px 20px;border-radius:12px;background:var(--green-light);border:1px solid rgba(0,168,68,.2);">
+<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px;">&#x2714; O que está incluso na taxa</div>
+<div style="font-size:12px;color:var(--text2);line-height:1.7;">Proteção contra desacordo comercial (chargeback)<br>Análise de fraude em tempo real<br>Gateway de pagamento integrado<br>Dashboard financeiro unificado</div>
+</div>
+<div style="padding:18px 20px;border-radius:12px;background:var(--red-light);border:1px solid rgba(234,29,44,.15);">
+<div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:6px;">&#x1F381; O que vem de bônus</div>
+<div style="font-size:12px;color:var(--text2);line-height:1.7;">3S Eats completo — GRÁTIS<br>App white-label na App Store e Play Store<br>Pedido na Mesa, Delivery, Retirada<br>Pagamento digital integrado ao app</div>
 </div>
 </div>
-
+<p class="tnote">* A diferença nas taxas financia serviços que normalmente são cobrados à parte (antifraude, chargeback, gateway). Com o 3S Eats incluso, o custo-benefício total se torna favorável.</p>
+</div>
+</div>
 <div class="slide s-inc">
 <div style="width:100%;max-width:1100px;">
 <div class="sec-head"><span class="tag">Transparência</span><h2>O que está <em>incluso</em> na taxa</h2><p>Uma taxa, diversos serviços embutidos</p></div>
@@ -359,7 +453,7 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 
 <div class="slide s-efic">
 <div style="width:100%;max-width:1200px;">
-<div class="sec-head"><span class="tag">Eficiência Operacional</span><h2>Mais tecnologia, <em>mais resultado</em></h2><p>Como o pedido digital na mesa transforma a operação do seu restaurante</p></div>
+<div class="sec-head"><span class="tag">Eficiência Operacional</span><h2>Mais tecnologia, <em>mais resultado</em></h2><p>Como a tecnologia complementa uma operação que já funciona bem</p></div>
 <div class="efic-grid"><div>
 <p class="efic-text">Com o <strong>3S Eats</strong>, o cliente faz o pedido e o pagamento direto pelo celular. Isso <strong>reduz a dependência de atendimento manual</strong> e permite que a equipe foque no que realmente importa: <strong>a experiência do cliente</strong>.</p>
 <p class="efic-text">Não se trata de reduzir equipe — se trata de <strong>usar melhor os recursos que você já tem</strong>. Com menos tarefas operacionais repetitivas, sua equipe pode dedicar mais atenção à hospitalidade, ao salão e à qualidade do serviço.</p>
@@ -384,12 +478,9 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 <div class="calc-field"><label>Faturamento mensal via iFood Pago (R$)</label><input type="number" id="cFat" value="500000" min="0" step="10000" onchange="calcular()" oninput="calcular()"></div>
 <div class="calc-field"><label>Taxa média MDR (%)</label>
 <select id="cTaxa" onchange="calcular()">
-<option value="0.99">PIX — 0,99%</option>
-<option value="1.99">Débito — 1,99%</option>
-<option value="3.49">Crédito D30 — 3,49%</option>
-<option value="4.49">Crédito D7 — 4,49%</option>
-<option value="4.69">Crédito D1 — 4,69%</option>
-<option value="2.50" selected>Média ponderada — 2,50%</option>
+<option value="0.64">PIX — 0,64%</option>
+<option value="1.00">Débito — 1,00%</option>
+<option value="2.10" selected>Crédito D30 — 2,10%</option>
 </select></div>
 <div class="calc-enc"><span>INSS ~28%</span><span>FGTS 8%</span><span>13º</span><span>Férias + 1/3</span><span>VT</span><span>VR</span><span>Provisões ~68% do salário</span></div>
 </div>
@@ -410,11 +501,29 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 </div>
 </div>
 
+
+<div class="slide s-agora">
+<div style="width:100%;max-width:1200px;">
+<div class="sec-head"><span class="tag">Oportunidade</span><h2>O momento certo para <em>evoluir</em></h2><p>Uma operação que já é referência pode ir ainda mais longe com a tecnologia certa</p></div>
+<div class="agora-grid"><div>
+<div class="agora-list">
+<div class="agora-item"><div class="ai-n">1</div><div><h4>Experiência do cliente em primeiro lugar</h4><p>Clientes que valorizam qualidade também valorizam conveniência. Pedido e pagamento digitais complementam o atendimento sem substituí-lo.</p></div></div>
+<div class="agora-item"><div class="ai-n">2</div><div><h4>Dados para decisões melhores</h4><p>Entender o que seus clientes pedem, em que horários e com qual frequência — tudo isso acessível em um dashboard inteligente.</p></div></div>
+<div class="agora-item"><div class="ai-n">3</div><div><h4>Sua marca, seu app</h4><p>Um aplicativo white-label com a identidade visual do seu negócio. Presente na App Store e Google Play, fortalecendo o relacionamento direto com o cliente.</p></div></div>
+<div class="agora-item"><div class="ai-n">4</div><div><h4>Sem risco: 3S Eats incluso</h4><p>Com o iFood Pago, o 3S Eats vem sem custo adicional. Uma ferramenta a mais para a operação, sem impacto no orçamento.</p></div></div>
+</div>
+</div><div class="agora-cta">
+<div class="agora-box"><div class="ab-n green">R$ 0</div><div class="ab-l">Custo do 3S Eats com iFood Pago</div><div class="ab-d">O app completo sai gratuito para quem aderir ao iFood Pago.</div></div>
+<div class="agora-box"><div class="ab-n" style="color:var(--orange);">4 módulos</div><div class="ab-l">Delivery, Mesa, Pagamento, Retirada</div><div class="ab-d">Ative o que fizer sentido para sua operação. Sem obrigatoriedade de usar tudo.</div></div>
+<div class="agora-box"><div class="ab-n red">&#x2764;</div><div class="ab-l">Suporte dedicado</div><div class="ab-d">Acompanhamento na implantação e treinamento da equipe para uma transição tranquila.</div></div>
+</div></div>
+</div>
+</div>
 <div class="slide s-oferta">
 <div class="sec-head"><span class="tag">Oferta Especial</span><h2>Nossa <em>Proposta</em></h2><p>Adote o iFood Pago e ganhe o 3S Eats gratuitamente</p></div>
 <div class="ogrid">
 <div class="ocard ocard-l"><h3>3S Eats — Super App</h3><p class="d">Módulos avulsos ou combo completo</p><p class="po">R$ 180,00/mês (módulo único) ou R$ 300,00/mês (combo)</p><p class="pf">GRÁTIS</p><p class="pc">para clientes que aderirem ao iFood Pago</p><ul class="ofl"><li>Delivery + Pedido na Mesa + Pagamento + Retirada</li><li>App com a sua marca</li><li>App Store e Google Play</li><li>Cardápio personalizável</li><li>Multi-unidade</li><li>Suporte dedicado</li></ul></div>
-<div class="ocard ocard-r"><div class="obadge">O que você contrata</div><h3 style="margin-top:10px">iFood Pago</h3><p class="d">Maquininha + meios de pagamento</p><p class="po">Taxas a partir de 0,89% no débito</p><ul class="ofl"><li>Maquininha iFood Pago</li><li>Débito, Crédito, Pix e Vale-refeição</li><li>Liquidação D1 (débito/Pix) e D30 (crédito)</li><li>Antecipação disponível (D1/D7)</li><li>Dashboard de gestão financeira</li><li>Pagamentos via App 3S Eats</li></ul></div>
+<div class="ocard ocard-r"><div class="obadge">O que você contrata</div><h3 style="margin-top:10px">iFood Pago</h3><p class="d">Maquininha + meios de pagamento</p><p class="po">Taxas a partir de 0,64% no Pix</p><ul class="ofl"><li>Maquininha iFood Pago</li><li>Débito, Crédito, Pix e Vale-refeição</li><li>Liquidação D1 (débito/Pix) e D30 (crédito)</li><li>Antecipação disponível (D1/D7)</li><li>Dashboard de gestão financeira</li><li>Pagamentos via App 3S Eats</li></ul></div>
 </div>
 </div>
 
@@ -429,12 +538,16 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
       total=slides.length,
       cur=0,busy=false,
       modeBtn=document.getElementById('modeBtn'),
-      scrollMode=false;
+      scrollMode=false,
+      cnt=document.getElementById('cnt'),
+      prog=document.getElementById('prog');
 
   function go(i){
     if(i<0||i>=total)return;
     cur=i;
     c.style.transform='translateY(-'+(cur*100)+'vh)';
+    cnt.textContent=(cur+1)+' / '+total;
+    prog.style.width=((cur+1)/total*100)+'%';
   }
 
   function next(){if(!busy){busy=true;go(cur+1);setTimeout(function(){busy=false;},700);}}
