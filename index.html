@@ -165,7 +165,51 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 .callout p { font-size:13px; color:var(--text2); line-height:1.6; }
 .callout .hl2 { display:inline-block; margin-top:14px; padding:9px 18px; background:var(--green-light); border-radius:8px; color:var(--green); font-weight:700; font-size:13px; }
 
-/* S8 OFERTA */
+/* S8 EFICIÊNCIA */
+.s-efic { background:var(--dark); color:white; flex-direction:column; }
+.s-efic .sec-head h2 { color:white; }
+.s-efic .sec-head h2 em { color:var(--green); }
+.s-efic .sec-head p { color:rgba(255,255,255,.55); }
+.s-efic .sec-head .tag { background:rgba(0,168,68,.15); color:var(--green); }
+.efic-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:50px; width:100%; max-width:1200px; align-items:center; }
+.efic-text { font-size:15px; color:rgba(255,255,255,.6); line-height:1.8; margin-bottom:18px; }
+.efic-text strong { color:white; font-weight:700; }
+.efic-cards { display:flex; flex-direction:column; gap:14px; }
+.efic-card { display:flex; align-items:flex-start; gap:14px; padding:18px 20px; border-radius:12px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); }
+.efic-card .eic { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; background:rgba(0,168,68,.12); }
+.efic-card h4 { font-size:13px; font-weight:700; color:white; margin-bottom:3px; }
+.efic-card p { font-size:12px; color:rgba(255,255,255,.5); line-height:1.5; }
+.efic-quote { margin-top:24px; padding:18px 22px; border-left:3px solid var(--green); background:rgba(0,168,68,.06); border-radius:0 10px 10px 0; }
+.efic-quote p { font-size:13px; color:rgba(255,255,255,.55); font-style:italic; line-height:1.6; }
+.efic-quote .eq-src { font-size:11px; color:rgba(255,255,255,.35); margin-top:6px; font-style:normal; }
+
+/* S9 CALCULADORA */
+.s-calc { background:white; flex-direction:column; padding:40px 60px; }
+.calc-wrap { display:grid; grid-template-columns:1fr 1fr; gap:40px; width:100%; max-width:1200px; align-items:start; }
+.calc-inputs { display:flex; flex-direction:column; gap:16px; }
+.calc-field { display:flex; flex-direction:column; gap:4px; }
+.calc-field label { font-size:12px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.5px; }
+.calc-field input, .calc-field select {
+  padding:12px 16px; border:1px solid var(--border); border-radius:10px;
+  font-size:15px; font-family:inherit; font-weight:600; color:var(--dark);
+  background:var(--bg2); outline:none; transition:border-color .2s;
+}
+.calc-field input:focus, .calc-field select:focus { border-color:var(--red); }
+.calc-results { display:flex; flex-direction:column; gap:14px; }
+.calc-row { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-radius:10px; border:1px solid var(--border2); background:var(--bg2); }
+.calc-row .cl { font-size:13px; color:var(--text2); font-weight:500; }
+.calc-row .cv { font-size:15px; font-weight:700; color:var(--dark); }
+.calc-row.neg .cv { color:var(--red); }
+.calc-row.pos .cv { color:var(--green); }
+.calc-big { text-align:center; padding:24px; border-radius:14px; border:2px solid var(--green); background:var(--green-light); }
+.calc-big .cb-label { font-size:12px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.calc-big .cb-val { font-size:36px; font-weight:900; color:var(--green); }
+.calc-big .cb-sub { font-size:13px; color:var(--text2); margin-top:4px; }
+.calc-note { font-size:11px; color:var(--text2); text-align:center; margin-top:6px; line-height:1.5; }
+.calc-enc { display:flex; gap:10px; margin-top:4px; flex-wrap:wrap; }
+.calc-enc span { font-size:10px; padding:4px 10px; border-radius:14px; background:var(--bg2); color:var(--text2); border:1px solid var(--border2); }
+
+/* S9 OFERTA */
 .s-oferta { background:var(--dark); color:white; flex-direction:column; }
 .s-oferta .sec-head h2 { color:white; }
 .s-oferta .sec-head p { color:rgba(255,255,255,.55); }
@@ -200,7 +244,7 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 
 @media(max-width:1024px) {
   .slide { padding:40px 24px; }
-  .split,.ifgrid,.incgrid,.ogrid { grid-template-columns:1fr; gap:32px; }
+  .split,.ifgrid,.incgrid,.ogrid,.efic-grid,.calc-wrap { grid-template-columns:1fr; gap:32px; }
   .mgrid { grid-template-columns:repeat(2,1fr); }
   .pqgrid { grid-template-columns:1fr; }
   .s-capa h1 { font-size:34px; }
@@ -213,7 +257,7 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 <div class="progress" id="prog"></div>
 <div class="mode-toggle"><button class="on" id="bSlide" onclick="setMode('slide')">Slides</button><button id="bScroll" onclick="setMode('scroll')">Scroll</button></div>
 <div class="nav-arrows"><button onclick="prev()">&#8592;</button><button onclick="next()">&#8594;</button></div>
-<div class="counter" id="cnt">1 / 9</div>
+<div class="counter" id="cnt">1 / 11</div>
 
 <div class="container" id="c">
 
@@ -313,57 +357,145 @@ body.scroll-mode .nav-arrows, body.scroll-mode .counter { display: none; }
 </div></div></div>
 </div>
 
+<div class="slide s-efic">
+<div style="width:100%;max-width:1200px;">
+<div class="sec-head"><span class="tag">Eficiência Operacional</span><h2>Mais tecnologia, <em>mais resultado</em></h2><p>Como o pedido digital na mesa transforma a operação do seu restaurante</p></div>
+<div class="efic-grid"><div>
+<p class="efic-text">Com o <strong>3S Eats</strong>, o cliente faz o pedido e o pagamento direto pelo celular. Isso <strong>reduz a dependência de atendimento manual</strong> e permite que a equipe foque no que realmente importa: <strong>a experiência do cliente</strong>.</p>
+<p class="efic-text">Não se trata de reduzir equipe — se trata de <strong>usar melhor os recursos que você já tem</strong>. Com menos tarefas operacionais repetitivas, sua equipe pode dedicar mais atenção à hospitalidade, ao salão e à qualidade do serviço.</p>
+<div class="efic-quote"><p>"Restaurantes que adotam pedido digital na mesa reportam ganhos significativos em agilidade de atendimento, redução de erros em pedidos e otimização da equipe de salão."</p><div class="eq-src">Tendência observada no setor de food service</div></div>
+</div><div class="efic-cards">
+<div class="efic-card"><div class="eic">&#x26A1;</div><div><h4>Atendimento mais ágil</h4><p>Sem espera para fazer o pedido. O cliente pede quando quiser, direto pelo app na mesa.</p></div></div>
+<div class="efic-card"><div class="eic">&#x2714;</div><div><h4>Menos erros operacionais</h4><p>O pedido vai direto para a cozinha, sem ruído de comunicação ou anotações incorretas.</p></div></div>
+<div class="efic-card"><div class="eic">&#x1F464;</div><div><h4>Equipe focada em hospitalidade</h4><p>Garçons livres de tarefas mecânicas podem se dedicar ao atendimento consultivo e ao bem-estar do cliente.</p></div></div>
+<div class="efic-card"><div class="eic">&#x1F4B0;</div><div><h4>Otimização de custos</h4><p>Possibilidade de redimensionar a equipe conforme a real necessidade, gerando economia operacional.</p></div></div>
+<div class="efic-card"><div class="eic">&#x1F4C8;</div><div><h4>Ticket médio maior</h4><p>Cardápio digital com fotos e sugestões estimula pedidos adicionais de forma natural.</p></div></div>
+</div></div>
+</div>
+</div>
+
+<div class="slide s-calc">
+<div style="width:100%;max-width:1200px;">
+<div class="sec-head"><span class="tag">Simulador</span><h2>Calculadora de <em>Economia</em></h2><p>Simule a redução de custos ao adotar pedido digital na mesa com 3S Eats + iFood Pago</p></div>
+<div class="calc-wrap">
+<div class="calc-inputs">
+<div class="calc-field"><label>Garçons que podem ser otimizados</label><input type="number" id="cGarcons" value="1" min="0" max="20" onchange="calcular()" oninput="calcular()"></div>
+<div class="calc-field"><label>Salário base mensal (R$)</label><input type="number" id="cSalario" value="1900" min="0" step="100" onchange="calcular()" oninput="calcular()"></div>
+<div class="calc-field"><label>Faturamento mensal via iFood Pago (R$)</label><input type="number" id="cFat" value="500000" min="0" step="10000" onchange="calcular()" oninput="calcular()"></div>
+<div class="calc-field"><label>Taxa média MDR (%)</label>
+<select id="cTaxa" onchange="calcular()">
+<option value="0.99">PIX — 0,99%</option>
+<option value="1.99">Débito — 1,99%</option>
+<option value="3.49">Crédito D30 — 3,49%</option>
+<option value="4.49">Crédito D7 — 4,49%</option>
+<option value="4.69">Crédito D1 — 4,69%</option>
+<option value="2.50" selected>Média ponderada — 2,50%</option>
+</select></div>
+<div class="calc-enc"><span>INSS ~28%</span><span>FGTS 8%</span><span>13º</span><span>Férias + 1/3</span><span>VT</span><span>VR</span><span>Provisões ~68% do salário</span></div>
+</div>
+<div class="calc-results">
+<div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px;">&#x1F4CA; Resultado da simulação</div>
+<div class="calc-row pos"><span class="cl">&#x1F4B0; Economia com garçons (mês)</span><span class="cv" id="rEcoGarcon">R$ 0</span></div>
+<div class="calc-row"><span class="cl">&#x1F464; Custo total por garçom (CLT)</span><span class="cv" id="rCustoGarcon">R$ 0</span></div>
+<div class="calc-row neg"><span class="cl">&#x1F4B3; Custo MDR iFood Pago (mês)</span><span class="cv" id="rCustoMDR">R$ 0</span></div>
+<div class="calc-row"><span class="cl">&#x1F4B1; % do faturamento em MDR</span><span class="cv" id="rPercMDR">0%</span></div>
+<div class="calc-big">
+<div class="cb-label">Economia líquida mensal</div>
+<div class="cb-val" id="rEcoMes">R$ 0</div>
+<div class="cb-sub">Economia anual estimada: <strong id="rEcoAno">R$ 0</strong></div>
+</div>
+<div class="calc-note">* Encargos CLT estimados em ~68% sobre o salário base (INSS, FGTS, 13º, férias, VT, VR e provisões). Valores para simulação — consulte seu contador para cálculos exatos.</div>
+</div>
+</div>
+</div>
+</div>
+
 <div class="slide s-oferta">
 <div class="sec-head"><span class="tag">Oferta Especial</span><h2>Nossa <em>Proposta</em></h2><p>Adote o iFood Pago e ganhe o 3S Eats gratuitamente</p></div>
 <div class="ogrid">
 <div class="ocard ocard-l"><h3>3S Eats — Super App</h3><p class="d">Módulos avulsos ou combo completo</p><p class="po">R$ 180,00/mês (módulo único) ou R$ 300,00/mês (combo)</p><p class="pf">GRÁTIS</p><p class="pc">para clientes que aderirem ao iFood Pago</p><ul class="ofl"><li>Delivery + Pedido na Mesa + Pagamento + Retirada</li><li>App com a sua marca</li><li>App Store e Google Play</li><li>Cardápio personalizável</li><li>Multi-unidade</li><li>Suporte dedicado</li></ul></div>
-<div class="ocard ocard-r"><div class="obadge">O que você contrata</div><h3 style="margin-top:10px">iFood Pago</h3><p class="d">Meio de pagamento integrado</p><p class="pt">Apenas a taxa sobre o transacionado</p><p class="pm">a partir de 0,99%</p><p class="pd">Taxas variam por modalidade.<br>Negociável conforme volume.</p><ul class="ofl"><li>Crédito, Débito e PIX</li><li>Desacordo comercial (chargeback) incluso</li><li>Antifraude em tempo real</li><li>Sem maquininha</li><li>Sem taxa de adesão</li><li>Liquidação D1, D7 ou D30</li></ul></div>
+<div class="ocard ocard-r"><div class="obadge">O que você contrata</div><h3 style="margin-top:10px">iFood Pago</h3><p class="d">Maquininha + meios de pagamento</p><p class="po">Taxas a partir de 0,89% no débito</p><ul class="ofl"><li>Maquininha iFood Pago</li><li>Débito, Crédito, Pix e Vale-refeição</li><li>Liquidação D1 (débito/Pix) e D30 (crédito)</li><li>Antecipação disponível (D1/D7)</li><li>Dashboard de gestão financeira</li><li>Pagamentos via App 3S Eats</li></ul></div>
 </div>
-<div class="setup"><p><strong>Setup único:</strong> R$ 2.000,00 — Publicação nas lojas oficiais</p></div>
 </div>
 
-<div class="slide s-contato">
-<h2>Vamos <em>começar</em>?</h2>
-<p class="sub">Entre em contato para uma proposta personalizada.</p>
-<div class="clinks"><a href="https://3scheckout.com.br" target="_blank"><span>&#x1F310;</span> 3scheckout.com.br</a><a href="https://instagram.com/3scheckout" target="_blank"><span>&#x1F4F7;</span> @3scheckout</a></div>
-</div>
+<div class="slide s-contato"><h2>Vamos <em>começar</em>?</h2><p class="sub">Entre em contato para uma proposta personalizada.</p><div class="clinks"><a href="https://3scheckout.com.br" target="_blank"><span>&#x1F310;</span> 3scheckout.com.br</a><a href="https://instagram.com/3scheckout" target="_blank"><span>&#x1F4F7;</span> @3scheckout</a></div></div>
 
 </div>
 
 <script>
-var cur = 0;
-var total = 9;
-var sliding = false;
-var slideMode = true;
+(function(){
+  var c=document.getElementById('c'),
+      slides=document.querySelectorAll('.slide'),
+      total=slides.length,
+      cur=0,busy=false,
+      modeBtn=document.getElementById('modeBtn'),
+      scrollMode=false;
 
-function go() {
-  document.getElementById('c').style.transform = 'translateY(-' + (cur * 100) + 'vh)';
-  document.getElementById('cnt').textContent = (cur+1) + ' / ' + total;
-  document.getElementById('prog').style.width = (((cur+1)/total)*100) + '%';
+  function go(i){
+    if(i<0||i>=total)return;
+    cur=i;
+    c.style.transform='translateY(-'+(cur*100)+'vh)';
+  }
+
+  function next(){if(!busy){busy=true;go(cur+1);setTimeout(function(){busy=false;},700);}}
+  function prev(){if(!busy){busy=true;go(cur-1);setTimeout(function(){busy=false;},700);}}
+
+  window.addEventListener('wheel',function(e){
+    if(scrollMode)return;
+    e.preventDefault();
+    if(e.deltaY>0)next();else prev();
+  },{passive:false});
+
+  document.addEventListener('keydown',function(e){
+    if(scrollMode)return;
+    if(e.key==='ArrowDown'||e.key===' ')next();
+    if(e.key==='ArrowUp')prev();
+  });
+
+  var tx=0,ty=0;
+  window.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;});
+  window.addEventListener('touchend',function(e){
+    if(scrollMode)return;
+    var dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dy)>50){if(dy<0)next();else prev();}
+  });
+
+  modeBtn.addEventListener('click',function(){
+    scrollMode=!scrollMode;
+    if(scrollMode){
+      c.style.transform='none';
+      c.style.position='relative';
+      slides.forEach(function(s){s.style.minHeight='100vh';s.style.height='auto';});
+      modeBtn.textContent='⬆ Modo Slides';
+    } else {
+      c.style.position='fixed';
+      slides.forEach(function(s){s.style.minHeight='';s.style.height='';});
+      go(cur);
+      modeBtn.textContent='↕ Modo Scroll';
+    }
+  });
+})();
+
+function fmt(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calcular(){
+  var g=parseInt(document.getElementById('cGarcons').value)||0;
+  var s=parseFloat(document.getElementById('cSalario').value)||0;
+  var f=parseFloat(document.getElementById('cFat').value)||0;
+  var t=parseFloat(document.getElementById('cTaxa').value)||0;
+  var encargos=0.68;
+  var custoGarcon=s*(1+encargos);
+  var ecoGarcons=g*custoGarcon;
+  var custoMDR=f*(t/100);
+  var ecoLiq=ecoGarcons-custoMDR;
+  document.getElementById('rCustoGarcon').textContent=fmt(custoGarcon);
+  document.getElementById('rEcoGarcon').textContent=fmt(ecoGarcons);
+  document.getElementById('rCustoMDR').textContent=fmt(custoMDR);
+  document.getElementById('rPercMDR').textContent=(f>0?((custoMDR/f)*100).toFixed(2):0)+'%';
+  document.getElementById('rEcoMes').textContent=fmt(ecoLiq);
+  document.getElementById('rEcoAno').textContent=fmt(ecoLiq*12);
+  document.getElementById('rEcoMes').style.color=ecoLiq>=0?'var(--green)':'var(--red)';
+  document.getElementById('rEcoAno').style.color=ecoLiq>=0?'var(--green)':'var(--red)';
 }
-function next() { if (sliding||cur>=total-1) return; sliding=true; cur++; go(); setTimeout(function(){sliding=false},700); }
-function prev() { if (sliding||cur<=0) return; sliding=true; cur--; go(); setTimeout(function(){sliding=false},700); }
-function setMode(m) {
-  slideMode=(m==='slide');
-  if(slideMode){document.body.classList.remove('scroll-mode');go();}
-  else{document.body.classList.add('scroll-mode');}
-  document.getElementById('bSlide').className=slideMode?'on':'';
-  document.getElementById('bScroll').className=slideMode?'':'on';
-}
-document.addEventListener('keydown',function(e){
-  if(!slideMode)return;
-  if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}
-  if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();prev();}
-});
-document.addEventListener('wheel',function(e){
-  if(!slideMode)return;
-  e.preventDefault();
-  if(e.deltaY>0)next();else prev();
-},{passive:false});
-var ty=0;
-document.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
-document.addEventListener('touchend',function(e){if(!slideMode)return;var d=ty-e.changedTouches[0].clientY;if(d>50)next();if(d<-50)prev();},{passive:true});
-go();
 </script>
 </body>
 </html>
