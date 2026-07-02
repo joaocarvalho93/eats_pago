@@ -410,7 +410,7 @@ body { height: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-b
 <tbody>
 <tr><td>PIX</td><td>0,64%<br><span style="font-size:10px;color:var(--text2);">(cap R$ 0,20/tx)</span></td><td style="color:var(--text2);text-decoration:line-through;">0,99%</td><td class="hl">0,64%<span class="eco">-0,35 p.p. de desconto</span></td></tr>
 <tr><td>Débito</td><td>0,74%</td><td style="color:var(--text2);text-decoration:line-through;">1,99%</td><td class="hl">1,00%<span class="eco">-0,99 p.p. de desconto</span></td></tr>
-<tr><td>Crédito (D30)</td><td>1,67%</td><td style="color:var(--text2);text-decoration:line-through;">3,49%</td><td class="hl">2,10%<span class="eco">-1,39 p.p. de desconto</span></td></tr>
+<tr><td>Crédito (D30)</td><td>1,67%</td><td style="color:var(--text2);text-decoration:line-through;">3,49%</td><td class="hl">1,67%<span class="eco">-1,82 p.p. de desconto</span></td></tr>
 </tbody></table></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;max-width:1000px;">
 <div style="padding:18px 20px;border-radius:12px;background:var(--green-light);border:1px solid rgba(0,168,68,.2);">
@@ -471,7 +471,7 @@ body { height: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-b
 <div class="calc-field"><label>Faturamento mensal (R$)</label><input type="number" id="cFat" value="500000" min="0" step="10000" onchange="calcular()" oninput="calcular()"></div>
 <div class="calc-field"><label>Diferença de taxa (iFood Pago vs. condição atual)</label>
 <select id="cTaxa" onchange="calcular()">
-<option value="0.43" selected>Crédito D30 — +0,43%</option>
+<option value="0.00" selected>Crédito D30 — 0% (igualamos)</option>
 <option value="0.26">Débito — +0,26%</option>
 <option value="0.62">PIX — +0,62%</option>
 </select></div>
